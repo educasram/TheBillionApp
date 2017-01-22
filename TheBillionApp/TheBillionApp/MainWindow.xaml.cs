@@ -23,6 +23,8 @@ namespace TheBillionApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<empresa> empresas;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -98,32 +100,40 @@ namespace TheBillionApp
                 string lista = "";
                 foreach (DataRow fila in tblHojas.Rows)
                 {
-                    lista += fila["TABLE_NAME"].ToString() + "\n";
-
-                    if (fila["TABLE_NAME"].ToString().EndsWith("$"))
+                    int indice = existe(fila["TABLE_NAME"].ToString());
+                    if (indice > -1)
                     {
-                        string nombreHoja = fila["TABLE_NAME"].ToString();
-                        MessageBox.Show(nombreHoja);
-                        cmd2.CommandText = "SELECT * FROM [" + nombreHoja + "]";
-                        cmd2.Connection = conn;
-                        da2.SelectCommand = cmd2;
-                        conn2.Open();
-                        da2.Fill(ds2);
-                        foreach (DataRow fila2 in ds2.Tables[0].Rows)
-                        {
 
-                            MessageBox.Show(fila2[0] + " - " + fila2[6]);
+                        if (fila["TABLE_NAME"].ToString().EndsWith("$"))
+                        {
+                            List<lectura> lectura = new List<lectura>();
+                             string nombreHoja = fila["TABLE_NAME"].ToString();
+             
+                            cmd2.CommandText = "SELECT * FROM [" + nombreHoja + "]";
+                            cmd2.Connection = conn;
+                            da2.SelectCommand = cmd2;
+                            conn2.Open();
+                            da2.Fill(ds2);
+                            foreach (DataRow fila2 in ds2.Tables[0].Rows)
+                            {
+                                float t = 0.0f;
+                                if (!float.TryParse(fila2[6].ToString(), out t))
+                                    t = -1;
+                                lectura.Add(new lectura(fila2[0].ToString(), t));
+
+
+                            }
+                            conn2.Close();
+                           // MessageBox.Show(indice.ToString());
+
+                            empresas[indice-2].lista = lectura;
+
 
 
                         }
-                        MessageBox.Show("Fichero Procesado Correctamente");
-                        conn2.Close();
-
-
-
                     }
+                  //  MessageBox.Show(lista);
                 }
-                MessageBox.Show(lista);
 
             }
             catch (Exception ex)
@@ -135,18 +145,32 @@ namespace TheBillionApp
                 conn.Close();
                 conn.Dispose();
             }
+        }
+
+        private int existe(string termino)
+        {
+            int pos = -1;
+            int conta = 0;
+
+            foreach(empresa e in empresas)
+            {
+                conta++;
+                if (e.clave == termino)
+                    pos = conta;
+            }
 
 
-
+            return conta;
         }
 
         public void getEmpesas()
         {
+            empresas = new List<empresa>();
             var conn = new OleDbConnection();
-            var conn2 = new OleDbConnection();
             var cmd = new OleDbCommand();
             var da = new OleDbDataAdapter();
             var ds = new DataSet();
+            string indice, nombre;
             try
             {
 
@@ -158,15 +182,31 @@ namespace TheBillionApp
                 da.Fill(ds);
                 foreach (DataRow fila2 in ds.Tables[0].Rows)
                 {
+                    String[] substrings = fila2[1].ToString().Split(':');
+                    if(!substrings[0].Equals("Starting report"))
+                    {
+                        indice = substrings[0];
+                        if (substrings.Length > 1)
+                        {
+                            if (substrings[1].Contains("<")){
+                                String[] ex = substrings[1].ToString().Split('<');
+                                String[] ex2 = ex[1].ToString().Split('>');
+                                empresas.Add(new empresa(indice, ex2[0]));
+                            }
+                        }
+                            
 
-                    MessageBox.Show(fila2[0] + " - " + fila2[1]);
+                    }
+                    
+
 
 
                 }
+                datos();
 
 
             }
-            catch (Exception er) { }
+            catch (Exception er) { MessageBox.Show(er.ToString());}
         }
     }
 }
