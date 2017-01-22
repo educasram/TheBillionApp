@@ -48,7 +48,7 @@ namespace TheBillionApp
             proceso1.Start();
 
 
-            MessageBox.Show("descompresion terminada archivo IMP");
+           // MessageBox.Show("descompresion terminada archivo IMP");
         }
         private void descromprimir2()
         {
@@ -65,7 +65,7 @@ namespace TheBillionApp
             proceso2.Start();
 
 
-            MessageBox.Show("descompresion terminada archivo AUTO");
+            //MessageBox.Show("descompresion terminada archivo AUTO");
         }
         private void datos()
         {
