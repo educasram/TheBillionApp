@@ -124,9 +124,9 @@ namespace TheBillionApp
 
                             }
                             conn2.Close();
-                            MessageBox.Show(indice.ToString());
+                           // MessageBox.Show(indice.ToString());
 
-                            empresas[indice].lista = lectura;
+                            empresas[indice-2].lista = lectura;
 
 
 
