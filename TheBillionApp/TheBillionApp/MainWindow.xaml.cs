@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO.Compression;
 
 namespace TheBillionApp
 {
@@ -25,10 +26,47 @@ namespace TheBillionApp
         public MainWindow()
         {
             InitializeComponent();
+            descromprimir();
+            descromprimir2();
             getEmpesas();
+           
 
         }
 
+        private void descromprimir()
+        {
+            System.Diagnostics.Process proceso1 = new System.Diagnostics.Process();
+           
+            string ruta1 = @"c:\archivos\IMP.rar";
+          
+            string destino1= @"c:\archivos";
+            proceso1.StartInfo.FileName = @"C:\Program Files\WinRAR\UnRAR.exe";//tienen que tener instalado winrar
+            proceso1.StartInfo.CreateNoWindow = true;
+            proceso1.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            proceso1.EnableRaisingEvents = false;
+            proceso1.StartInfo.Arguments = string.Format("x -o+ \"{0}\" \"{1}\"", ruta1, destino1);
+            proceso1.Start();
+
+
+            MessageBox.Show("descompresion terminada archivo IMP");
+        }
+        private void descromprimir2()
+        {
+            System.Diagnostics.Process proceso2= new System.Diagnostics.Process();
+
+            string ruta2 = @"c:\archivos\AUTO.rar";
+
+            string destino2 = @"c:\archivos";
+            proceso2.StartInfo.FileName = @"C:\Program Files\WinRAR\UnRAR.exe";
+            proceso2.StartInfo.CreateNoWindow = true;
+            proceso2.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            proceso2.EnableRaisingEvents = false;
+            proceso2.StartInfo.Arguments = string.Format("x -o+ \"{0}\" \"{1}\"", ruta2, destino2);
+            proceso2.Start();
+
+
+            MessageBox.Show("descompresion terminada archivo AUTO");
+        }
         private void datos()
         {
 
@@ -42,6 +80,7 @@ namespace TheBillionApp
             var ds2 = new DataSet();
             try
             {
+
 
                 conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + @"C:\archivos\IMP" + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
                 conn2.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + @"C:\archivos\IMP" + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
