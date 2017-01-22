@@ -24,14 +24,66 @@ namespace TheBillionApp
     public partial class MainWindow : Window
     {
         private List<empresa> empresas;
+        private int totalIntervalos;
         
         public MainWindow()
         {
             InitializeComponent();
-            descromprimir();
-            descromprimir2();
+            //descromprimir();
+            //descromprimir2();
             getEmpesas();
+            getFecha();
+            //ver();
+            llenado();
+            
            
+            
+           
+
+        }
+        public void ver()
+        {
+
+            string l = "";
+            empresa tem = empresas[0];
+            MessageBox.Show(tem.nombre);
+        }
+        private void llenado()
+        {
+            tabla.ItemsSource = null;
+            DataTable dt = new DataTable();
+            dt.Columns.Add("SERVICIO");
+            dt.Columns.Add("NOMBRE");
+            dt.Columns.Add("NO DE INTERVALOS");
+            dt.Columns.Add("INTERVALOS CON FALLA");
+            dt.Columns.Add("LLENAR CON 0");
+            dt.Columns.Add("DBF");
+            dt.Columns.Add("XLS");
+            dt.Columns.Add("CSV");
+            string[] valores = new string[4];
+            string listaRango = "";
+            foreach (empresa e in empresas)
+            {
+                string tem=e.totalDanado.ToString() + "/" + totalIntervalos.ToString();
+              //  MessageBox.Show(tem);
+                if (e.danado == true)
+                {
+                    foreach(string t in e.intervaloMal)
+                    {
+                        listaRango += t + "\n";
+                    }
+                }
+                valores[0] = e.clave.ToString();
+                valores[1] = e.nombre;
+                valores[2] = tem;
+                valores[3] = listaRango;
+
+                dt.Rows.Add(valores);
+                listaRango="";
+
+
+            }
+            tabla.ItemsSource = dt.DefaultView;
 
         }
 
@@ -50,7 +102,7 @@ namespace TheBillionApp
             proceso1.Start();
 
 
-            MessageBox.Show("descompresion terminada archivo IMP");
+           
         }
         private void descromprimir2()
         {
@@ -67,72 +119,78 @@ namespace TheBillionApp
             proceso2.Start();
 
 
-            MessageBox.Show("descompresion terminada archivo AUTO");
+     
         }
         private void datos()
         {
-
             var conn = new OleDbConnection();
-            var conn2 = new OleDbConnection();
             var cmd = new OleDbCommand();
             var da = new OleDbDataAdapter();
             var ds = new DataSet();
-            var cmd2 = new OleDbCommand();
-            var da2 = new OleDbDataAdapter();
-            var ds2 = new DataSet();
             try
             {
-
-
-                conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + @"C:\archivos\IMP" + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
-                conn2.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + @"C:\archivos\IMP" + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
-                cmd.CommandText = "SELECT * FROM [DA15F203$]"; // no olivdar incluir el simbolo de peso
-                cmd.Connection = conn;
-                da.SelectCommand = cmd;
-                conn.Open();
-                da.Fill(ds);
-
-
-                DataTable tblHojas = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables,
-                         new object[] { null, null, null, "TABLE" });
-                //OBTENEMOS CANTIDAD DE PESTAÑAS DE ARCHIVO
-                int nrorows = tblHojas.Rows.Count;
-                string lista = "";
-                foreach (DataRow fila in tblHojas.Rows)
+                int inidice = -1;
+                foreach (empresa fila in empresas)
                 {
-                    int indice = existe(fila["TABLE_NAME"].ToString());
-                    if (indice > -1)
-                    {
+                    conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + @"C:\archivos\IMP" + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
 
-                        if (fila["TABLE_NAME"].ToString().EndsWith("$"))
+                    cmd.CommandText = "SELECT * FROM ["+fila.clave+"$]"; // no olivdar incluir el simbolo de peso
+                    cmd.Connection = conn;
+                    da.SelectCommand = cmd;
+                    conn.Open();
+                    da.Fill(ds);
+                    inidice++;
+                    int danado = 0;
+                    string rango = "",rangoAnterior="";
+                    Boolean existeRango = false, existeRango2 = false;
+                    List<lectura> lectura = new List<lectura>();
+                        foreach (DataRow fila2 in ds.Tables[0].Rows)
                         {
-                            List<lectura> lectura = new List<lectura>();
-                             string nombreHoja = fila["TABLE_NAME"].ToString();
-             
-                            cmd2.CommandText = "SELECT * FROM [" + nombreHoja + "]";
-                            cmd2.Connection = conn;
-                            da2.SelectCommand = cmd2;
-                            conn2.Open();
-                            da2.Fill(ds2);
-                            foreach (DataRow fila2 in ds2.Tables[0].Rows)
+                            float t = 0.0f;
+                            if (!float.TryParse(fila2[6].ToString(), out t))
+                                t = -1;
+                        if (t == -1)
+                        {
+                            if (rango == "")
                             {
-                                float t = 0.0f;
-                                if (!float.TryParse(fila2[6].ToString(), out t))
-                                    t = -1;
-                                lectura.Add(new lectura(fila2[0].ToString(), t));
+                                rango += fila2[0].ToString();
+                                existeRango = true;
+                            }else
+                                rangoAnterior= fila2[0].ToString();
 
-
-                            }
-                            conn2.Close();
-                           // MessageBox.Show(indice.ToString());
-
-                            empresas[indice-2].lista = lectura;
-
-
+                            danado++;
+                            t = 0;
 
                         }
+                        if(t>0 && existeRango == true)
+                        {
+                            rango += "-" + rangoAnterior;
+                            rangoAnterior = "";
+                            empresas[inidice].intervaloMal.Add(rango);
+                            rango = "";
+                            existeRango = false;
+                        }
+
+                            lectura.Add(new lectura(fila2[0].ToString(), t));
+                     
+
+                        //   MessageBox.Show(fila2[0].ToString()+" "+t.ToString());
                     }
-                  //  MessageBox.Show(lista);
+
+                    
+
+                    //checar parametro de dañado
+                    empresas[inidice].lista = lectura;
+                    empresas[inidice].totalDanado = totalIntervalos-danado;
+                    if (danado > 0)
+                    { empresas[inidice].danado = true; }
+
+                    danado = 0;
+
+                    conn.Close();
+                    conn.Dispose();
+
+                    //  MessageBox.Show(lista);
                 }
 
             }
@@ -147,20 +205,22 @@ namespace TheBillionApp
             }
         }
 
-        private int existe(string termino)
+        private Boolean existe(string termino)
         {
             int pos = -1;
-            int conta = 0;
+            int conta = -1;
 
             foreach(empresa e in empresas)
             {
                 conta++;
                 if (e.clave == termino)
-                    pos = conta;
+                    return true;
+
+                              
             }
 
 
-            return conta;
+            return false;
         }
 
         public void getEmpesas()
@@ -170,7 +230,7 @@ namespace TheBillionApp
             var cmd = new OleDbCommand();
             var da = new OleDbDataAdapter();
             var ds = new DataSet();
-            string indice, nombre;
+            string indice, nombre, m = "";
             try
             {
 
@@ -191,7 +251,9 @@ namespace TheBillionApp
                             if (substrings[1].Contains("<")){
                                 String[] ex = substrings[1].ToString().Split('<');
                                 String[] ex2 = ex[1].ToString().Split('>');
+                                if(!existe(indice))
                                 empresas.Add(new empresa(indice, ex2[0]));
+                                m += indice + "\n";
                             }
                         }
                             
@@ -202,11 +264,33 @@ namespace TheBillionApp
 
 
                 }
+             //   MessageBox.Show(m);
                 datos();
 
 
             }
             catch (Exception er) { MessageBox.Show(er.ToString());}
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+            }
+        }
+
+        public void getFecha()
+        {
+            string fecha;
+            fecha = "";
+            fecha = empresas[0].lista[0].fecha;
+            string[] f = fecha.Split('/');
+            string[] m = f[2].Split(' ');
+            int a, b;
+            int.TryParse(m[0], out b);
+            int.TryParse(f[1], out a);
+            int dias = System.DateTime.DaysInMonth(b, a);
+            totalIntervalos = (((60 / 5) * 24) * dias);
+                    
+
         }
     }
 }

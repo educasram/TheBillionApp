@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TheBillionApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="BILLION" Height="768" Width="1200" MinWidth="4">
     <Grid>
-        
+        <DataGrid x:Name="tabla" Margin="10,71,10,32"/>
     </Grid>
 </Window>
