@@ -21,24 +21,22 @@ namespace TheBillionApp
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
+    /// 
     public partial class MainWindow : Window
     {
         private List<empresa> empresas;
         private int totalIntervalos;
-        
+       
+
         public MainWindow()
         {
+
+
             InitializeComponent();
-            //descromprimir();
-            //descromprimir2();
             getEmpesas();
             getFecha();
             //ver();
-            llenado();
-            
-           
-            
-           
+            llenado();           
 
         }
         public void ver()
@@ -48,7 +46,7 @@ namespace TheBillionApp
             empresa tem = empresas[0];
             MessageBox.Show(tem.nombre);
         }
-        private void llenado()
+        public void llenado()
         {
             tabla.ItemsSource = null;
             DataTable dt = new DataTable();
@@ -60,6 +58,7 @@ namespace TheBillionApp
             dt.Columns.Add("DBF");
             dt.Columns.Add("XLS");
             dt.Columns.Add("CSV");
+            
             string[] valores = new string[4];
             string listaRango = "";
             foreach (empresa e in empresas)
@@ -87,40 +86,6 @@ namespace TheBillionApp
 
         }
 
-        private void descromprimir()
-        {
-            System.Diagnostics.Process proceso1 = new System.Diagnostics.Process();
-           
-            string ruta1 = @"c:\archivos\IMP.rar";
-          
-            string destino1= @"c:\archivos";
-            proceso1.StartInfo.FileName = @"C:\Program Files\WinRAR\UnRAR.exe";//tienen que tener instalado winrar
-            proceso1.StartInfo.CreateNoWindow = true;
-            proceso1.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            proceso1.EnableRaisingEvents = false;
-            proceso1.StartInfo.Arguments = string.Format("x -o+ \"{0}\" \"{1}\"", ruta1, destino1);
-            proceso1.Start();
-
-
-           
-        }
-        private void descromprimir2()
-        {
-            System.Diagnostics.Process proceso2= new System.Diagnostics.Process();
-
-            string ruta2 = @"c:\archivos\AUTO.rar";
-
-            string destino2 = @"c:\archivos";
-            proceso2.StartInfo.FileName = @"C:\Program Files\WinRAR\UnRAR.exe";
-            proceso2.StartInfo.CreateNoWindow = true;
-            proceso2.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            proceso2.EnableRaisingEvents = false;
-            proceso2.StartInfo.Arguments = string.Format("x -o+ \"{0}\" \"{1}\"", ruta2, destino2);
-            proceso2.Start();
-
-
-     
-        }
         private void datos()
         {
             var conn = new OleDbConnection();
@@ -290,6 +255,11 @@ namespace TheBillionApp
             int dias = System.DateTime.DaysInMonth(b, a);
             totalIntervalos = (((60 / 5) * 24) * dias);
                     
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
