@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO.Compression;
 
+
 namespace TheBillionApp
 {
     /// <summary>
@@ -35,10 +36,11 @@ namespace TheBillionApp
             getFecha();
             //ver();
             llenado();
-            
-           
-            
-           
+            generarExcel m = new generarExcel( empresas);
+
+
+
+
 
         }
         public void ver()
@@ -160,8 +162,7 @@ namespace TheBillionApp
                             float t = 0.0f, t1 = 0.0f, t2 = 0.0f, t3 = 0.0f, t4 = 0.0f, t5 = 0.0f, t6 = 0.0f;
                             if (!float.TryParse(fila2[6].ToString(), out t))
                                 t = -1;
-                            else
-                                MessageBox.Show(t.ToString());
+                    
 
                             if (!float.TryParse(fila2[1].ToString(), out t1))
                                 t1 = 0;

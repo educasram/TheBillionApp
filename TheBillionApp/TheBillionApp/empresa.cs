@@ -22,6 +22,7 @@ namespace TheBillionApp
             intervaloMal = new List<string>();
             danado = false;
             totalDanado = 0;
+           
 
         }
 
