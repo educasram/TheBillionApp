@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TheBillionApp"
         mc:Ignorable="d"
-        Title="BILLION" Height="768" Width="1366" MinWidth="4" Background="Black">
+        Title="BILLION" Height="768" Width="1366" MinWidth="4" Background="Black" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid Margin="0,0,0,-3">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -24,7 +24,21 @@
             <ColumnDefinition Width="0*"/>
 
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="tabla" Margin="123,78,133,68" Background="White" Grid.Row="1" Grid.RowSpan="2"/>
+        <DataGrid x:Name="tabla" Margin="123,78,133,68" Background="White" Grid.Row="1" Grid.RowSpan="2" SelectionChanged="tabla_SelectionChanged"/>
+        <DataGrid ItemsSource="{Binding Customers}" AutoGenerateColumns="False" >
+    <DataGrid.Columns>
+        <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding Image}" />
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+    </DataGrid.Columns>
+</DataGrid>
+ 
+        
+        
         <Grid HorizontalAlignment="Left" Height="158" VerticalAlignment="Top" Width="1358" Grid.ColumnSpan="2" Margin="0,0,-42,0" Grid.RowSpan="2">
             <Grid.Background>
                 <ImageBrush ImageSource="Images/industry-024.jpg" TileMode="Tile">
@@ -47,11 +61,15 @@
                 </Grid.Background>
             </Grid>
             <TextBox HorizontalAlignment="Left" Height="37" Margin="958,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" BorderBrush="#FF00B9FF" FontSize="30" TextDecorations="{x:Null}" Cursor="Help" RenderTransformOrigin="0.5,0.5"/>
-            <Button Content="" HorizontalAlignment="Left" Margin="1294,58,0,0" VerticalAlignment="Top" Width="40" Height="37" Click="Button_Click" Foreground="#FF054C87" BorderBrush="#FF001663">
+            <Button Content="" HorizontalAlignment="Left" Margin="1294,58,0,0" VerticalAlignment="Top" Width="40" Height="37" Foreground="#FF054C87" BorderBrush="#FF001663">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/lookup_icon.png" Stretch="Uniform"/>
                 </Button.Background>
             </Button>
+            <ContentControl Content="ContentControl" HorizontalAlignment="Left" Margin="248,106,0,-176" VerticalAlignment="Top" Height="228" Width="228"/>
+            
+            
+            
         </Grid>
         <Rectangle HorizontalAlignment="Left" Height="72" Margin="106,28,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="1124" RenderTransformOrigin="0.5,0.46">
             <Rectangle.Effect>

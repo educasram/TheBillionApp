@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO.Compression;
-
+using System.Threading;
 
 namespace TheBillionApp
 {
@@ -26,21 +26,52 @@ namespace TheBillionApp
     {
         private List<empresa> empresas;
         int totalIntervalos;
-        
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+
         public MainWindow()
         {
             InitializeComponent();
             //descromprimir();
             //descromprimir2();
+           
+            // 
+            
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+            dispatcherTimer.Start();
+           
+
+
+
+
+
+
+
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            cargando();
+            dispatcherTimer.Stop();
+
+        }
+
+        private void cargando()
+        {
             getEmpesas();
             getFecha();
             //ver();
             llenado();
-            generarExcel m = new generarExcel( empresas);
 
+            
+           
 
+        }
 
-
+        private void generar()
+        {
+            generarExcel m = new generarExcel(empresas);
+            m.generarEmpresa(empresas[0]);
 
         }
         public void ver()
@@ -92,6 +123,9 @@ namespace TheBillionApp
 
             }
             tabla.ItemsSource = dt.DefaultView;
+            Thread te = new Thread(generar);
+            te.Start();
+
             //MessageBox.Show(empresas[5].imprimeRango(5));
 
         }
@@ -328,6 +362,11 @@ namespace TheBillionApp
             int dias = System.DateTime.DaysInMonth(b, a);
             totalIntervalos = (((60 / 5) * 24) * dias);
                     
+
+        }
+
+        private void tabla_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }
