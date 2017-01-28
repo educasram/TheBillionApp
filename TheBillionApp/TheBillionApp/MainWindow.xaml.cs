@@ -119,7 +119,7 @@ namespace TheBillionApp
 
                 dt.Rows.Add(valores);
                 
-
+                //
 
             }
             tabla.ItemsSource = dt.DefaultView;
