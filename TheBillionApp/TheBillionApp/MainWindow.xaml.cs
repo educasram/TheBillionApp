@@ -71,7 +71,8 @@ namespace TheBillionApp
         private void generar()
         {
             generarExcel m = new generarExcel(empresas);
-            m.generarEmpresa(empresas[0]);
+            foreach(empresa e in empresas)
+            m.generarEmpresa(e);
 
         }
         public void ver()
@@ -83,16 +84,8 @@ namespace TheBillionApp
         }
         private void llenado()
         {
-            tabla.ItemsSource = null;
-            DataTable dt = new DataTable();
-            dt.Columns.Add("SERVICIO");
-            dt.Columns.Add("NOMBRE");
-            dt.Columns.Add("NO DE INTERVALOS");
-            dt.Columns.Add("INTERVALOS CON FALLA");
-            dt.Columns.Add("LLENAR CON 0");
-            dt.Columns.Add("DBF");
-            dt.Columns.Add("XLS");
-            dt.Columns.Add("CSV");
+          //  tabla.ItemsSource = null;
+       
             
             
             foreach (empresa e in empresas)
@@ -117,20 +110,31 @@ namespace TheBillionApp
                // MessageBox.Show(listaRango);
                 listaRango = "";
 
-                dt.Rows.Add(valores);
+               // dt.Rows.Add(valores);
                 
                 //
 
             }
-            tabla.ItemsSource = dt.DefaultView;
-            Thread te = new Thread(generar);
-            te.Start();
+            tabla.ItemsSource = empresas;
+            //Thread te = new Thread(generar);
+           // te.Start();
 
             //MessageBox.Show(empresas[5].imprimeRango(5));
 
         }
 
-        private void descromprimir()
+    
+            void MakeButton(object sender, RoutedEventArgs e)
+            {
+            int row = tabla.SelectedIndex;
+
+           
+            MessageBox.Show(row.ToString());
+           
+            }
+        
+
+            private void descromprimir()
         {
             System.Diagnostics.Process proceso1 = new System.Diagnostics.Process();
            

@@ -24,7 +24,11 @@ namespace TheBillionApp
         public Boolean generarEmpresa(empresa e)
         {
 
-            string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\archivos\TestSO1.xls;Extended Properties=""Excel 8.0;HDR=NO;""";
+
+            string nombre = e.clave + ".xls";
+            string con =@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\archivos\"+ nombre +" ;Extended Properties='';Excel 8.0;HDR=NO;";
+
+            string connectionString = con;
             DbProviderFactory factory =
               DbProviderFactories.GetFactory("System.Data.OleDb");
 
@@ -34,14 +38,20 @@ namespace TheBillionApp
                 using (DbCommand command = connection.CreateCommand())
                 {
                     connection.Open();  //open the connection
+                    string nombrame = e.clave;
+
+                    if (e.clave == "DA013111")
+                        nombrame = "error";
+                        
+
 
                   
-                            command.CommandText = "CREATE TABLE [" + e.clave + "] (LocalTime char(255), kVARhQ1 char(255), kVARhQ2 char(255), kVARhQ3 char(255), kVARhQ4 char(255), kWhE char(255), kWhR char(255), PTxCTPM char(255))";
+                            command.CommandText = "CREATE TABLE [" + nombrame + "] (LocalTime char(255), kVARhQ1 char(255), kVARhQ2 char(255), kVARhQ3 char(255), kVARhQ4 char(255), kWhE char(255), kWhR char(255), PTxCTPM char(255))";
                             command.ExecuteNonQuery();
 
                             foreach (lectura l in e.getLectura())
                             {
-                                command.CommandText = "INSERT INTO [" + e.clave + "$]  VALUES('" + l.fecha + "'," + l.q1 + "," + l.q2 + "," + l.q3 + "," + l.q4 + "," + l.e + "," + l.r + "," + l.pm + ")";
+                                command.CommandText = "INSERT INTO [" + nombrame + "$]  VALUES('" + l.fecha + "'," + l.q1 + "," + l.q2 + "," + l.q3 + "," + l.q4 + "," + l.e + "," + l.r + "," + l.pm + ")";
                                 command.ExecuteNonQuery();
 
                             }
