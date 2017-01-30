@@ -25,28 +25,18 @@ namespace TheBillionApp
     public partial class MainWindow : Window
     {
         private List<empresa> empresas;
-        int totalIntervalos;
+       public int totalIntervalos, seleccionado = -1, seleccionLista = -1, opt = 0;
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
-            //descromprimir();
-            //descromprimir2();
            
-            // 
-            
+
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             dispatcherTimer.Start();
            
-
-
-
-
-
-
-
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -63,16 +53,13 @@ namespace TheBillionApp
             //ver();
             llenado();
 
-            
-           
-
         }
 
         private void generar()
         {
             generarExcel m = new generarExcel(empresas);
-            foreach(empresa e in empresas)
-            m.generarEmpresa(e);
+    
+            m.generarEmpresa(empresas[seleccionado]);
 
         }
         public void ver()
@@ -84,57 +71,27 @@ namespace TheBillionApp
         }
         private void llenado()
         {
-          //  tabla.ItemsSource = null;
-       
-            
-            
-            foreach (empresa e in empresas)
-            {
-                string[] valores = new string[4];
-                string tem= (totalIntervalos - e.getTotalDano()).ToString() + "/" + totalIntervalos.ToString();
-                string listaRango = "";
-                if (e.getDano() == true)
-                {
-                    
-                    List<string> temporal = e.getIntervaloMal();
-                  
-                    foreach (string t in temporal)
-                    {
-                        listaRango += t + "\n";
-                    }
-                }
-                valores[0] = e.clave.ToString();
-                valores[1] = e.nombre;
-                valores[2] = tem;
-                valores[3] = listaRango;
-               // MessageBox.Show(listaRango);
-                listaRango = "";
-
-               // dt.Rows.Add(valores);
-                
-                //
-
-            }
             tabla.ItemsSource = empresas;
-            //Thread te = new Thread(generar);
-           // te.Start();
-
-            //MessageBox.Show(empresas[5].imprimeRango(5));
-
         }
 
     
             void MakeButton(object sender, RoutedEventArgs e)
             {
-            int row = tabla.SelectedIndex;
-
-           
-            MessageBox.Show(row.ToString());
-           
-            }
+            seleccionado = tabla.SelectedIndex;
         
+          
+            Button btn = (Button)e.Source;
+            btn.IsEnabled = false;
 
-            private void descromprimir()
+
+
+            Thread te = new Thread(generar);
+             te.Start();
+
+            }
+
+
+        private void descromprimir()
         {
             System.Diagnostics.Process proceso1 = new System.Diagnostics.Process();
            
@@ -350,6 +307,16 @@ namespace TheBillionApp
                 conn.Close();
                 conn.Dispose();
             }
+        }
+
+    
+        private void cambio(object sender, MouseButtonEventArgs e)
+        {
+
+            ListView btn = (ListView)sender;
+            seleccionLista = btn.SelectedIndex;
+            opcion opc = new opcion(this);
+            opc.Show();
         }
 
         public void getFecha()

@@ -144,7 +144,7 @@
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ListView Margin="10" Name="lvDataBinding" ItemsSource="{Binding intervaloMal}">
+                            <ListView Margin="10" Name="lvDataBinding" ItemsSource="{Binding intervaloMal}" MouseLeftButtonUp="cambio">
                               
                             </ListView>
                         </DataTemplate>
@@ -160,6 +160,7 @@
                         <DataTemplate>
                             
                             <Button Content="LLENAR"
+                                    Name="Button01"
                 HorizontalAlignment="Left"
                 Margin="10,10,0,0"
                 VerticalAlignment="Top"
