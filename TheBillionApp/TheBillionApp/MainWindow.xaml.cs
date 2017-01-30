@@ -31,11 +31,9 @@ namespace TheBillionApp
         public MainWindow()
         {
             InitializeComponent();
-            //descromprimir();
-            //descromprimir2();
-           
-            // 
-            
+
+            AdminPanel ap = new AdminPanel();
+            ap.Show();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             dispatcherTimer.Start();
@@ -130,40 +128,7 @@ namespace TheBillionApp
 
         }
 
-        private void descromprimir()
-        {
-            System.Diagnostics.Process proceso1 = new System.Diagnostics.Process();
-           
-            string ruta1 = @"c:\archivos\IMP.rar";
-          
-            string destino1= @"c:\archivos";
-            proceso1.StartInfo.FileName = @"C:\Program Files\WinRAR\UnRAR.exe";//tienen que tener instalado winrar
-            proceso1.StartInfo.CreateNoWindow = true;
-            proceso1.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            proceso1.EnableRaisingEvents = false;
-            proceso1.StartInfo.Arguments = string.Format("x -o+ \"{0}\" \"{1}\"", ruta1, destino1);
-            proceso1.Start();
-
-
-           
-        }
-        private void descromprimir2()
-        {
-            System.Diagnostics.Process proceso2= new System.Diagnostics.Process();
-
-            string ruta2 = @"c:\archivos\AUTO.rar";
-
-            string destino2 = @"c:\archivos";
-            proceso2.StartInfo.FileName = @"C:\Program Files\WinRAR\UnRAR.exe";
-            proceso2.StartInfo.CreateNoWindow = true;
-            proceso2.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            proceso2.EnableRaisingEvents = false;
-            proceso2.StartInfo.Arguments = string.Format("x -o+ \"{0}\" \"{1}\"", ruta2, destino2);
-            proceso2.Start();
-
-
      
-        }
         private void datos()
         {
           
