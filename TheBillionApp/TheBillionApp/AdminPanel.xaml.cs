@@ -27,6 +27,7 @@ namespace TheBillionApp
         public AdminPanel()
         {
             InitializeComponent();
+            //hola test XD
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
