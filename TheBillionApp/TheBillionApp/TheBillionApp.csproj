@@ -77,6 +77,7 @@
     </Compile>
     <Compile Include="empresa.cs" />
     <Compile Include="generarCSV.cs" />
+    <Compile Include="generarDBF.cs" />
     <Compile Include="generarExcel.cs" />
     <Compile Include="lectura.cs" />
     <Compile Include="MainWindow.xaml.cs">

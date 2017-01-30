@@ -124,8 +124,10 @@ namespace TheBillionApp
 
      
         private void datos()
-        {
-          
+        {//Local Time	kVARh Q1	kVARh Q4	kWh del E
+            /* falta case para cuando la empresa no tienen todas las columnas o no tienen ningun registro*/
+
+
             try
             {          
                 foreach (empresa fila in empresas)
@@ -211,7 +213,7 @@ namespace TheBillionApp
                     }
                     catch (Exception ex)
                     {
-                      //  MessageBox.Show(ex.Message);
+                      //columna 6  MessageBox.Show(ex.Message);
                     }
                     finally
                     {
@@ -338,6 +340,21 @@ namespace TheBillionApp
             generarCSV m = new generarCSV();
 
             Boolean b1=m.generar(empresas[seleccionado]);
+        }
+
+        private void generadbf(object sender, RoutedEventArgs e)
+        {
+            seleccionado = tabla.SelectedIndex;
+            Button btn = (Button)e.Source;
+            btn.IsEnabled = false;
+            Thread te = new Thread(generaDBF);
+            te.Start();
+        }
+
+        private void generaDBF()
+        {
+            generarDBF m = new generarDBF();
+             m.generar(empresas[seleccionado]);
         }
 
         private void cambio(object sender, MouseButtonEventArgs e)
