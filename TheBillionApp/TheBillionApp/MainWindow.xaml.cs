@@ -101,7 +101,7 @@ namespace TheBillionApp
             MessageBox.Show(tem.nombre);
         }
         private void llenado()
-        {
+        {//
             tabla.ItemsSource = empresas;
         }
 
