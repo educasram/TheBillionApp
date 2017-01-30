@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TheBillionApp"
         mc:Ignorable="d"
-        Title="opcion" Height="113.333" Width="198" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Margin="10" Background="#FF0C0B0B" WindowStyle="None" AllowsTransparency="True" Opacity="0.6">
+        Title="opcion" Height="113.333" Width="198" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Margin="10" Background="#FF0C0B0B" WindowStyle="None" AllowsTransparency="True" Opacity="0.8">
+    <Window.Foreground>
+        <RadialGradientBrush>
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="#FFD64040" Offset="1"/>
+        </RadialGradientBrush>
+    </Window.Foreground>
     <Window.BorderBrush>
         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
             <GradientStop Color="Black" Offset="0"/>

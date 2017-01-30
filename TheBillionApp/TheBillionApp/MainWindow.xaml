@@ -152,24 +152,7 @@
                
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn >
-                    <DataGridTemplateColumn.Header>
-                        <TextBlock  Text="LLENAR CON 0"  />
-                    </DataGridTemplateColumn.Header>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            
-                            <Button Content="LLENAR"
-                                    Name="Button01"
-                HorizontalAlignment="Left"
-                Margin="10,10,0,0"
-                VerticalAlignment="Top"
-                Width="75" Click="MakeButton"
-               />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-           
-                </DataGridTemplateColumn>
+            
 
                 <DataGridTemplateColumn >
                     <DataGridTemplateColumn.Header>
@@ -198,7 +181,7 @@
                 HorizontalAlignment="Left"
                 Margin="10,10,0,0"
                 VerticalAlignment="Top"
-                Width="75"
+                Width="75" Click="generarxls"
                />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -211,19 +194,15 @@
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock  x:Name="generocsv" Text="{Binding generoCSV}"  />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate >
-                        <DataTemplate>
-                            <Button Content="Button"
+                            <Button Content="GENERAR"
                 HorizontalAlignment="Left"
                 Margin="10,10,0,0"
                 VerticalAlignment="Top"
-                Width="75"
+                Width="75" Click="generacsv"
                />
                         </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                 
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>

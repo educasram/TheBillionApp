@@ -49,6 +49,8 @@ namespace TheBillionApp
 
         public void addIntervaloMal(string t) { intervaloMal.Add(t); }
 
+        public void setListaLectura(List<lectura> m) { lista=m; }
+
 
         public string imprimeRango(int a)
         {
