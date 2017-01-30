@@ -38,6 +38,31 @@ namespace TheBillionApp
             dispatcherTimer.Start();
            
         }
+        public void cambioLlenado(int a)
+        {
+            opt = a;
+            string t1 = empresas[seleccionado].intervaloMal[a];
+            string[] tt = t1.Split('-');
+            t1 = tt[0];
+            string t2 = tt[1];
+            if (opt == 1)
+            {
+                List<lectura> lec = empresas[seleccionado].getLectura();
+                List<lectura> tem = new List<lectura>();
+                foreach(lectura l1 in lec)
+                {
+                    if (l1.fecha.Equals(t1))
+                        l1.cantidad = 0;
+                    if (l1.fecha.Equals(t2))
+                    {
+                        l1.cantidad = 0;
+                        tem.Add(l1);
+                        break;
+                    }
+                    tem.Add(l1);
+                }
+                empresas[seleccionado].setListaLectura(tem);           }
+        }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -309,7 +334,39 @@ namespace TheBillionApp
             }
         }
 
-    
+        private void generarxls(object sender, RoutedEventArgs e)
+        {
+            seleccionado = tabla.SelectedIndex;
+
+
+            Button btn = (Button)e.Source;
+            btn.IsEnabled = false;
+
+
+
+            Thread te = new Thread(generar);
+            te.Start();
+        }
+
+        private void generacsv(object sender, RoutedEventArgs e)
+        {
+            seleccionado = tabla.SelectedIndex;
+
+
+            Button btn = (Button)e.Source;
+            btn.IsEnabled = false;
+
+            Thread te = new Thread(generacsv);
+            te.Start();
+        }
+
+        private void generacsv()
+        {
+            generarCSV m = new generarCSV();
+
+            Boolean b1=m.generar(empresas[seleccionado]);
+        }
+
         private void cambio(object sender, MouseButtonEventArgs e)
         {
 
