@@ -31,14 +31,14 @@ namespace TheBillionApp
         public MainWindow()
         {
             InitializeComponent();
-<<<<<<< HEAD
+
 
             AdminPanel ap = new AdminPanel();
             ap.Show();
-=======
+
            
 
->>>>>>> 72bc71f0d0d40a1f498c73a3b175faac0cbea77b
+
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             dispatcherTimer.Start();
