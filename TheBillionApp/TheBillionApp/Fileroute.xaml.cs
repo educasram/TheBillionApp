@@ -47,7 +47,11 @@ namespace TheBillionApp
             xx.getroute1 = route1;
             xx.getroute2 = route2;
             xx.getnewroute = newroute;
+            
+            this.Hide();
             xx.Show();
+            xx.getfileroutes();
+            
 
             this.Close();
         

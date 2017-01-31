@@ -50,12 +50,12 @@ namespace TheBillionApp
 
             this.Hide();
 
-            getfileroutes();
+         
 
-
+            /*
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
-            dispatcherTimer.Start();
+            dispatcherTimer.Start();*/
 
         }
         public void getfileroutes()
@@ -65,8 +65,9 @@ namespace TheBillionApp
             getnewroute = Fileroute.newroute;
             rutas.Add(@getroute1);
             rutas.Add(@getroute2);
+            cargando();
 
-            MessageBox.Show(getroute1);
+
 
         }
 
