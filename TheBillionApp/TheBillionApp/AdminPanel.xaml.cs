@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
 using System.Data;
 
 namespace TheBillionApp
@@ -66,7 +66,7 @@ namespace TheBillionApp
 
         private void LoadData()
         {
-            MySqlConnection connection = new MySqlConnection(MyConnectionString);
+           /* MySqlConnection connection = new MySqlConnection(MyConnectionString);
             MySqlCommand cmd;
             connection.Open();
             try
@@ -92,7 +92,7 @@ namespace TheBillionApp
                     connection.Clone();
                    
                 }
-            }
+            }*/
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {

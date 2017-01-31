@@ -17,7 +17,7 @@ namespace TheBillionApp
         public float e { get; set; }
         public float r { get; set; }
         public float pm { get; set; }
-        public lectura(string f, float c, float q1, float q2, float q3, float q4, float e, float pm)
+        public lectura(string f, float c, float q1, float q2, float q3, float q4,  float rr, float pm)
         {
             fecha = f;
             cantidad = c;
@@ -25,8 +25,31 @@ namespace TheBillionApp
             this.q2 = q2;
             this.q3 = q3;
             this.q4 = q4;
-            this.e = e;
+            this.e = c;
             this.pm = pm;
+            r = rr;
+        }
+        public lectura(string f, float c, float q1, float q2, float q3, float q4,  float rr)
+        {
+            fecha = f;
+            cantidad = c;
+            this.q1 = q1;
+            this.q2 = q2;
+            this.q3 = q3;
+            this.q4 = q4;
+            this.e = c;
+            this.r = rr;
+        }
+
+        public lectura(string f, float c, float q1, float q4)
+        {
+            fecha = f;
+            cantidad = c;
+            this.q1 = q1;
+   
+            this.q4 = q4;
+            this.e = c;
+
         }
 
     }
