@@ -40,10 +40,8 @@ namespace TheBillionApp
             InitializeComponent();
             empresas = new List<empresa>();
             rutas = new List<string>();
-            rutas.Add(@"C:\archivos\AUTO");
-            rutas.Add(@"C:\archivos\IMP");
-            getroute1 = @"C:\archivos\IMP";
-            getroute2 = @"C:\archivos\AUTO";
+           
+        
 
             Fileroute fr = new Fileroute(this);
             fr.Show();
@@ -52,7 +50,7 @@ namespace TheBillionApp
 
             this.Hide();
 
-            //getfileroutes();
+            getfileroutes();
 
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -65,6 +63,9 @@ namespace TheBillionApp
             getroute1 = Fileroute.route1;
             getroute2 = Fileroute.route2;
             getnewroute = Fileroute.newroute;
+            rutas.Add(@getroute1);
+            rutas.Add(@getroute2);
+          
             MessageBox.Show(getroute1);
 
         }
@@ -180,16 +181,23 @@ namespace TheBillionApp
         private void cargando()
         {
             int con = 0;
+<<<<<<< HEAD
+            foreach (string r in rutas)
+            {
+                con++;
+                getEmpesas(@r, con);
+=======
             foreach(string r in rutas)
             {
                 con++;
                 getEmpesas(@r,con);
+>>>>>>> f63aa754d0cf8b61cc01e05baa57f17c87bb4cfd
             }
 
             datos();
             getFecha();
             //ver();
-              llenado();
+            llenado();
 
         }
 
