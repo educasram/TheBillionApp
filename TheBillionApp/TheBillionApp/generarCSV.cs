@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace TheBillionApp
 {
@@ -17,60 +18,125 @@ namespace TheBillionApp
             //Exportamos el CVS ...
             StringBuilder tmpCSV = new StringBuilder();
             string tmpLinea = "";
-
-            tmpCSV.Append("(LocalTime;kVARhQ1;kVARhQ2;kVARhQ3;kVARhQ4;kWhE;kWhR;PTxCTPM");
-            tmpCSV.Append("\r\n");
-            foreach (lectura l in e.getLectura())
+            if (e.columnas == 9)
             {
-   
-                tmpLinea = "";
-    
-                tmpLinea += l.fecha + ";";
-                tmpLinea += l.q1 + ";";
-                tmpLinea += l.q2 + ";";
-                tmpLinea += l.q3 + ";";
-                tmpLinea += l.q4 + ";";
-                tmpLinea += l.e + ";";
-                tmpLinea += l.r + ";";
-                tmpLinea += l.pm;
-             
 
-                tmpCSV.Append(tmpLinea + "\r\n");
-            }
-
-            try
-            {
-                string csvFile = e.clave + ".csv";
-                string csvFilePath = @"C:\archivos\" + csvFile;
-                using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
+                tmpCSV.Append("(LocalTime;kVARhQ1;kVARhQ2;kVARhQ3;kVARhQ4;kWhE;kWhR;PTxCTPM");
+                tmpCSV.Append("\r\n");
+                foreach (lectura l in e.getLectura())
                 {
-                    sw.Write(tmpCSV.ToString());
-                    sw.Close();
+
+                    tmpLinea = "";
+
+                    tmpLinea += l.fecha + ";";
+                    tmpLinea += l.q1 + ";";
+                    tmpLinea += l.q2 + ";";
+                    tmpLinea += l.q3 + ";";
+                    tmpLinea += l.q4 + ";";
+                    tmpLinea += l.cantidad + ";";
+                    tmpLinea += l.r + ";";
+                    tmpLinea += l.pm;
+
+
+                    tmpCSV.Append(tmpLinea + "\r\n");
                 }
-                /*
-                //Preparamos el response ...
-                Response.Clear();
-                Response.AddHeader("Content-Disposition", "attachment; filename=clientes.csv");
-                Response.ContentType = "application/vnd.csv";
-                Response.Charset = "UTF-8";
-                Response.ContentEncoding = System.Text.Encoding.UTF8;
 
-                //Cargamos el archivo en memoria ...
-                byte[] MyData = (byte[])System.IO.File.ReadAllBytes(csvFilePath);
-                Response.BinaryWrite(MyData);
-
-                //Eliminamos el archivo ...
-                System.IO.File.Delete(csvFilePath);
-
-                //Terminamos el response ..
-                Response.End();
-                */
+                try
+                {
+                    string csvFile = e.clave + ".csv";
+                    string csvFilePath = @"C:\archivos\" + csvFile;
+                    using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
+                    {
+                        sw.Write(tmpCSV.ToString());
+                        sw.Close();
+                    }
+       
+                }
+                catch (Exception ex)
+                {
+             
+                    return false;
+                }
             }
-            catch (Exception ex)
+
+            if (e.columnas == 8)
             {
-                //  ClientScript.RegisterClientScriptBlock(this.GetType(), "CSV", "alert('Error al exportar el fichero')", true);
-                return false;
+
+                tmpCSV.Append("(LocalTime;kVARhQ1;kVARhQ2;kVARhQ3;kVARhQ4;kWhE;kWhR;");
+                tmpCSV.Append("\r\n");
+                foreach (lectura l in e.getLectura())
+                {
+
+                    tmpLinea = "";
+
+                    tmpLinea += l.fecha + ";";
+                    tmpLinea += l.q1 + ";";
+                    tmpLinea += l.q2 + ";";
+                    tmpLinea += l.q3 + ";";
+                    tmpLinea += l.q4 + ";";
+                    tmpLinea += l.cantidad + ";";
+                    tmpLinea += l.r;
+   
+
+
+                    tmpCSV.Append(tmpLinea + "\r\n");
+                }
+
+                try
+                {
+                    string csvFile = e.clave + ".csv";
+                    string csvFilePath = @"C:\archivos\" + csvFile;
+                    using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
+                    {
+                        sw.Write(tmpCSV.ToString());
+                        sw.Close();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    return false;
+                }
             }
+
+            if (e.columnas == 5)
+            {
+
+                tmpCSV.Append("(LocalTime;kVARhQ1;kVARhQ4;kWh");
+                tmpCSV.Append("\r\n");
+                foreach (lectura l in e.getLectura())
+                {
+
+                    tmpLinea = "";
+
+                    tmpLinea += l.fecha + ";";
+                    tmpLinea += l.q1 + ";";
+                    tmpLinea += l.q4 + ";";
+                    tmpLinea += l.cantidad;
+
+
+                    tmpCSV.Append(tmpLinea + "\r\n");
+                }
+
+                try
+                {
+                    string csvFile = e.clave + ".csv";
+                    string csvFilePath = @"C:\archivos\" + csvFile;
+                    using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
+                    {
+                        sw.Write(tmpCSV.ToString());
+                        sw.Close();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    return false;
+                }
+            }
+            MessageBox.Show("Se genero el CSV de la empresa " + e.clave);
             return true;
         }
     }
