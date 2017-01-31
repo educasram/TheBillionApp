@@ -19,24 +19,27 @@ using System.Threading;
 
 namespace TheBillionApp
 {
+   
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         private List<empresa> empresas;
-       public int totalIntervalos, seleccionado = -1, seleccionLista = -1, opt = 0;
+        public string getroute1,getroute2,getnewroute;
+        public int totalIntervalos, seleccionado = -1, seleccionLista = -1, opt = 0;
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-
+        Fileroute fr = new Fileroute();
         public MainWindow()
         {
             InitializeComponent();
 
-
-            AdminPanel ap = new AdminPanel();
-            ap.Show();
-
-           
+            
+            fr.Show();
+            // AdminPanel ap = new AdminPanel();
+            //ap.Show();
+            this.Hide();
+            
 
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -44,6 +47,15 @@ namespace TheBillionApp
             dispatcherTimer.Start();
            
         }
+        public void getfileroutes()
+        {         
+            getroute1 = Fileroute.route1;
+            getroute2 = Fileroute.route2;
+            getnewroute = Fileroute.newroute;
+            MessageBox.Show(getroute1);
+
+        }
+   
         public void cambioLlenado(int a)
         {
             opt = a;
