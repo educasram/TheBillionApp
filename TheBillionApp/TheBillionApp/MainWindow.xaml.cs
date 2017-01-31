@@ -41,13 +41,12 @@ namespace TheBillionApp
             fr.Show();
             // AdminPanel ap = new AdminPanel();
             //ap.Show();
-<<<<<<< HEAD
+
             this.Hide();
 
             //getfileroutes();
-=======
+
             this.Hide();          
->>>>>>> 988aa9f72fe8f80ec97f352c92cc457e6f78af3c
 
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
