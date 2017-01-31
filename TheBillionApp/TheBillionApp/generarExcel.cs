@@ -26,7 +26,7 @@ namespace TheBillionApp
         {
 
             string nombre = e.clave + ".xls";
-            string con =@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\archivos\"+ nombre +" ;Extended Properties='';Excel 8.0;HDR=NO;";
+            string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=@Fileroute.newroute" + nombre +" ;Extended Properties='';Excel 8.0;HDR=NO;";
 
             string connectionString = con;
             DbProviderFactory factory =

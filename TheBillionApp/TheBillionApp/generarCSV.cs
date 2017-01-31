@@ -44,7 +44,7 @@ namespace TheBillionApp
                 try
                 {
                     string csvFile = e.clave + ".csv";
-                    string csvFilePath = @"C:\archivos\" + csvFile;
+                    string csvFilePath = @Fileroute.newroute + csvFile;
                     using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
                     {
                         sw.Write(tmpCSV.ToString());
@@ -85,7 +85,7 @@ namespace TheBillionApp
                 try
                 {
                     string csvFile = e.clave + ".csv";
-                    string csvFilePath = @"C:\archivos\" + csvFile;
+                    string csvFilePath = @Fileroute.newroute + csvFile;
                     using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
                     {
                         sw.Write(tmpCSV.ToString());
@@ -122,7 +122,7 @@ namespace TheBillionApp
                 try
                 {
                     string csvFile = e.clave + ".csv";
-                    string csvFilePath = @"C:\archivos\" + csvFile;
+                    string csvFilePath = @Fileroute.newroute + csvFile;
                     using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
                     {
                         sw.Write(tmpCSV.ToString());
