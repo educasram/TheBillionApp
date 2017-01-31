@@ -31,7 +31,7 @@ namespace TheBillionApp
                 opt = 1;
             else
                 opt = 2;
-            t.opt = opt;
+            t.cambioLlenado(opt);
             this.Close();
 
         }

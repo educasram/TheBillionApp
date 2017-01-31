@@ -10,7 +10,7 @@ namespace TheBillionApp
     {
         public string clave { get; set; }
         public string nombre { get; set; }
-
+        public List<lectura> listaMal { get; set; }
         public List<lectura> lista { get; set; }
         public List<string> intervaloMal { get; set; }
         public Boolean danado { get; set; }
@@ -27,6 +27,7 @@ namespace TheBillionApp
             totalDanado = 0;
             tieneRegistros = false;
             columnas = 0;
+            listaMal = new List<lectura>();
 
 
 

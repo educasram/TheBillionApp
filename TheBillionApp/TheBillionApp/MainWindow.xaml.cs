@@ -32,18 +32,22 @@ namespace TheBillionApp
         public string getroute1,getroute2,getnewroute;
         public int totalIntervalos, seleccionado = -1, seleccionLista = -1, opt = 0;
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        Fileroute fr = new Fileroute();
+        
         public MainWindow()
         {
             InitializeComponent();
 
-            
+            Fileroute fr = new Fileroute(this);
             fr.Show();
             // AdminPanel ap = new AdminPanel();
             //ap.Show();
+<<<<<<< HEAD
             this.Hide();
 
             //getfileroutes();
+=======
+            this.Hide();          
+>>>>>>> 988aa9f72fe8f80ec97f352c92cc457e6f78af3c
 
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -62,29 +66,104 @@ namespace TheBillionApp
    
         public void cambioLlenado(int a)
         {
+
+            
             opt = a;
-            string t1 = empresas[seleccionado].intervaloMal[a];
+            string t1 = empresas[tabla.SelectedIndex].intervaloMal[seleccionLista];
             string[] tt = t1.Split('-');
             t1 = tt[0];
             string t2 = tt[1];
+            List<lectura> lec = empresas[tabla.SelectedIndex].getLectura();
+            List<lectura> tem = new List<lectura>();
+
             if (opt == 1)
             {
-                List<lectura> lec = empresas[seleccionado].getLectura();
-                List<lectura> tem = new List<lectura>();
-                foreach(lectura l1 in lec)
+
+                foreach (lectura l1 in lec)
                 {
+
+
                     if (l1.fecha.Equals(t1))
+                    {
                         l1.cantidad = 0;
+
+                    }
+                    else
                     if (l1.fecha.Equals(t2))
                     {
                         l1.cantidad = 0;
                         tem.Add(l1);
                         break;
                     }
+
                     tem.Add(l1);
                 }
-                empresas[seleccionado].setListaLectura(tem);           }
+                empresas[tabla.SelectedIndex].setListaLectura(tem);
+            }
+            if (opt == 2)
+            {
+
+                foreach (lectura li2 in lec)
+                {
+                    if (li2.index == seleccionLista)
+                    {
+                         t1 = li2.fecha;
+                     
+                        string te = t1.Substring(0, 2);
+                        int dia = 0;
+                        int.TryParse(te, out dia);
+                        int pos = -1, pos2 = 0;
+                        //buscamos dia anterior
+                        if (dia < 9)
+                            dia = dia + 7;
+                        else
+                            dia = dia - 7;
+                        String fecTem = "";
+                        if (dia < 10)
+                            fecTem = "0" + dia.ToString();
+                        else
+                            fecTem = dia.ToString();
+                        fecTem = fecTem + t1.Substring(2);
+
+                        foreach (lectura li in lec)
+                        {
+                            pos++;
+
+                            if (li.fecha.Equals(t1))
+                            {
+                                pos2 = pos;
+                            }
+
+                        }
+
+                        foreach (lectura l1 in lec)
+                        {
+
+                            if (l1.fecha.Equals(fecTem))
+                            {
+                                float nCantidad = l1.cantidad;
+                                empresas[tabla.SelectedIndex].lista[pos2].cantidad = nCantidad;
+                                empresas[tabla.SelectedIndex].lista[pos2].e = l1.e;
+                                empresas[tabla.SelectedIndex].lista[pos2].pm = l1.pm;
+                                empresas[tabla.SelectedIndex].lista[pos2].q1 = l1.q1;
+                                empresas[tabla.SelectedIndex].lista[pos2].q2 = l1.q2;
+                                empresas[tabla.SelectedIndex].lista[pos2].q3 = l1.q3;
+                                empresas[tabla.SelectedIndex].lista[pos2].q4 = l1.q4;
+                                empresas[tabla.SelectedIndex].lista[pos2].r = l1.r;
+                               
+                            }
+
+                        }
+
+
+                    }
+                }
+            }
+        
+                
+            
         }
+
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -144,6 +223,7 @@ namespace TheBillionApp
             /* falta case para cuando la empresa no tienen todas las columnas o no tienen ningun registro*/
             int conta = 0,conta2=-1;
             int columnas = 0;
+            
 
 
 
@@ -156,6 +236,7 @@ namespace TheBillionApp
                     var da = new OleDbDataAdapter();
                     var ds = new DataSet();
                     conta2++;
+                    int indice = -1,indice2=-1;
                     try
                     {
 
@@ -166,8 +247,6 @@ namespace TheBillionApp
                         da.SelectCommand = cmd;
                         conn.Open();
                         da.Fill(ds);
-
-
                         string rango = "", rangoAnterior = "";
 
                         Boolean existeRango = false, existeRango2 = false;
@@ -195,8 +274,6 @@ namespace TheBillionApp
                             {
                                 if (!float.TryParse(fila2[6].ToString(), out t))
                                     t = -1;
-
-                              
                                 if (!float.TryParse(fila2[2].ToString(), out t2))
                                     t2 = 0;
                                 if (!float.TryParse(fila2[3].ToString(), out t3))
@@ -233,6 +310,8 @@ namespace TheBillionApp
                             {
                                 if (rango == "")
                                 {
+                               
+                                    indice++;
                                     rango += fila2[0].ToString();
                                     existeRango = true;
                                 }
@@ -240,7 +319,7 @@ namespace TheBillionApp
                                     rangoAnterior = fila2[0].ToString();
 
                                 danado++;
-                                t = 0;
+                              
 
                             }
                             if (t > 0 && existeRango == true)
@@ -256,12 +335,22 @@ namespace TheBillionApp
                                 rangoAnterior = "";
                                 existeRango = false;
                             }
+                            if (t == -1)
+                            {
+                                t = 0;
+                                indice2 = indice;
+
+                            }
+                            else
+                                indice2 = -1;
+                                
                             if(total==8)
-                            fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, t4, t5, t6));
+                            fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, t4, t5, t6, indice2));
                             if (total == 9)
-                                fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, t4, t5, t6,t7));
+                                fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, t4, t5, t6,t7, indice2));
                             if(total==5)
-                                fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3));
+                                fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, indice2));
+                            
 
 
                         }
@@ -282,6 +371,7 @@ namespace TheBillionApp
                      cmd = null;
                     da = null;
                      ds = null;
+                    indice = -1;
                 }
 
             }
