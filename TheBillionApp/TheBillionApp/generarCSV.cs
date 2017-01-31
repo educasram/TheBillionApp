@@ -10,14 +10,16 @@ namespace TheBillionApp
 {
     class generarCSV
     {
+        public static string getnewroute3;
         public generarCSV() { }
-
+      
         public Boolean generar(empresa e)
         {
-           
+            getnewroute3 = @Fileroute.newroute;
             //Exportamos el CVS ...
             StringBuilder tmpCSV = new StringBuilder();
             string tmpLinea = "";
+            MessageBox.Show("Se genero el CSV de la empresa " + e.clave);
             if (e.columnas == 9)
             {
 
@@ -44,7 +46,8 @@ namespace TheBillionApp
                 try
                 {
                     string csvFile = e.clave + ".csv";
-                    string csvFilePath = @Fileroute.newroute + csvFile;
+                    
+                    string csvFilePath = getnewroute3 + csvFile;
                     using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
                     {
                         sw.Write(tmpCSV.ToString());
@@ -85,7 +88,8 @@ namespace TheBillionApp
                 try
                 {
                     string csvFile = e.clave + ".csv";
-                    string csvFilePath = @Fileroute.newroute + csvFile;
+                 
+                    string csvFilePath = getnewroute3 + csvFile;
                     using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
                     {
                         sw.Write(tmpCSV.ToString());
@@ -122,7 +126,8 @@ namespace TheBillionApp
                 try
                 {
                     string csvFile = e.clave + ".csv";
-                    string csvFilePath = @Fileroute.newroute + csvFile;
+                   
+                    string csvFilePath = getnewroute3 + csvFile;
                     using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
                     {
                         sw.Write(tmpCSV.ToString());
@@ -136,7 +141,7 @@ namespace TheBillionApp
                     return false;
                 }
             }
-            MessageBox.Show("Se genero el CSV de la empresa " + e.clave);
+         
             return true;
         }
     }

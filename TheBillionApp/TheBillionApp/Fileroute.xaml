@@ -12,7 +12,7 @@
         <TextBox x:Name="getroute2" HorizontalAlignment="Left" Height="27" Margin="140,84,0,0" TextWrapping="Wrap" Text="C:\archivos\AUTO.xls&#xA;" VerticalAlignment="Top" Width="597" FontSize="16" TextChanged="TextBox_TextChanged"/>
         <Label Content="Ruta Archivo 2" HorizontalAlignment="Left" Margin="29,83,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15"/>
         <Label Content="Especificar ruta y nombre de archivos para leer con extensión" HorizontalAlignment="Left" Margin="193,0,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15"/>
-        <TextBox x:Name="getnewroute" HorizontalAlignment="Left" Height="27" Margin="140,170,0,0" TextWrapping="Wrap" Text="C:\archivos&#xA;" VerticalAlignment="Top" Width="597" FontSize="16" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="getnewroute" HorizontalAlignment="Left" Height="27" Margin="140,170,0,0" TextWrapping="Wrap" Text="C:\archivos" VerticalAlignment="Top" Width="597" FontSize="16" TextChanged="TextBox_TextChanged"/>
         <Label Content="Ruta nueva" HorizontalAlignment="Left" Margin="47,171,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15" Width="111"/>
         <Label Content="Especificar ruta para guardar archivos nuevos" HorizontalAlignment="Left" Margin="245,135,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15"/>
         <Button x:Name="button" Content="ACEPTAR" HorizontalAlignment="Left" Margin="307,214,0,0" VerticalAlignment="Top" Width="186" BorderBrush="#FF6F9AF7" OpacityMask="#FFD41E1E" Foreground="#FFFDFCFC" FontWeight="Bold" FontSize="14" Click="seleccionado" Height="39">

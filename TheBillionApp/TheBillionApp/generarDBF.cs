@@ -11,13 +11,17 @@ namespace TheBillionApp
 {
     class generarDBF
     {
+        public static string getnewroute2;
+       
         public generarDBF()
         {
-
+           
         }
+      
         public void generar(empresa e)
         {
-            string ruta = @Fileroute.newroute;
+            getnewroute2 = @Fileroute.newroute;
+            string ruta = getnewroute2;
             string strConnDbase = @"Provider = Microsoft.Jet.OLEDB.4.0" +
                                    ";Data Source = " + ruta +
                                    ";Extended Properties = dBASE IV" +
