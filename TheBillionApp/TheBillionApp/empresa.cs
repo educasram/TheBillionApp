@@ -9,6 +9,7 @@ namespace TheBillionApp
     class empresa
     {
         public string clave { get; set; }
+        public int index { get; set; }
         public string nombre { get; set; }
         public List<lectura> listaMal { get; set; }
         public List<lectura> lista { get; set; }
@@ -17,7 +18,7 @@ namespace TheBillionApp
         public int totalDanado { get; set; }
         public int columnas { get; set; }
         public Boolean tieneRegistros { get; set; }
-        public empresa(string c, string n)
+        public empresa(string c, string n,int ind)
         {
             nombre = n;
             clave = c;
@@ -28,12 +29,14 @@ namespace TheBillionApp
             tieneRegistros = false;
             columnas = 0;
             listaMal = new List<lectura>();
+            index = ind;
 
 
 
         }
 
         public List<string> getIntervaloMal() { return intervaloMal; }
+
         public List<lectura> getLectura() { return lista; }
         public Boolean getDano() { return danado; }
         public int getTotalDano() { return totalDanado; }

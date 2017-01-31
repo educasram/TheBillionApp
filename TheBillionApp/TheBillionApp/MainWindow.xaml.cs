@@ -31,12 +31,19 @@ namespace TheBillionApp
         private List<empresa> empresas;
         public string getroute1,getroute2,getnewroute;
         public int totalIntervalos, seleccionado = -1, seleccionLista = -1, opt = 0;
+        public List<string> rutas;
+        
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         
         public MainWindow()
         {
             InitializeComponent();
             empresas = new List<empresa>();
+            rutas = new List<string>();
+            rutas.Add(@"C:\archivos\AUTO");
+            rutas.Add(@"C:\archivos\IMP");
+            getroute1 = @"C:\archivos\IMP";
+            getroute2 = @"C:\archivos\AUTO";
 
             Fileroute fr = new Fileroute(this);
             fr.Show();
@@ -174,11 +181,20 @@ namespace TheBillionApp
 
         private void cargando()
         {
-            getEmpesas(@"C:\archivos\IMP");
-            getEmpesas(@"C:\archivos\AUTO");
+            int i = 0;
+            foreach(string ruta1 in rutas)
+            {
+                i++;
+                getEmpesas(ruta1,i);
+            }
+            
+           // getEmpesas(getroute2);
+            datos();
+           
+
             getFecha();
             //ver();
-            llenado();
+              llenado();
 
         }
 
@@ -198,6 +214,7 @@ namespace TheBillionApp
         }
         private void llenado()
         {//
+            
             tabla.ItemsSource = empresas;
         }
 
@@ -219,177 +236,179 @@ namespace TheBillionApp
 
 
      
-        private void datos(string path)
+        private void datos()
         {//Local Time	kVARh Q1	kVARh Q4	kWh del E
-            /* falta case para cuando la empresa no tienen todas las columnas o no tienen ningun registro*/
-            int conta = 0,conta2=-1;
-            int columnas = 0;
-            
+         /* falta case para cuando la empresa no tienen todas las columnas o no tienen ningun registro*/
+            string r1 = rutas[0];
+            string r2 = rutas[1];
+
+
+            int conta = 0, conta2 = -1;
+                int columnas = 0;
 
 
 
-            try
-            {          
-                foreach (empresa fila in empresas)
+
+                try
                 {
-                    var conn = new OleDbConnection();
-                    var cmd = new OleDbCommand();
-                    var da = new OleDbDataAdapter();
-                    var ds = new DataSet();
-                    conta2++;
-                    int indice = -1,indice2=-1;
-                    try
+                    foreach (empresa fila in empresas)
                     {
-
-                        conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
-                        int danado = 0;
-                        cmd.CommandText = "SELECT * FROM [" + fila.clave + "$]"; // no olivdar incluir el simbolo de peso
-                        cmd.Connection = conn;
-                        da.SelectCommand = cmd;
-                        conn.Open();
-                        da.Fill(ds);
-                        string rango = "", rangoAnterior = "";
-
-                        Boolean existeRango = false, existeRango2 = false;
-                        int total= ds.Tables[0].Columns.Count;
-                        fila.columnas = total;
-
-
-                        foreach (DataRow fila2 in ds.Tables[0].Rows)
+                        var conn = new OleDbConnection();
+                        var cmd = new OleDbCommand();
+                        var da = new OleDbDataAdapter();
+                        var ds = new DataSet();
+                        conta2++;
+                        int indice = -1, indice2 = -1;
+                        try
                         {
 
+                            conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +(fila.index==1?r1:r2) + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
+                            int danado = 0;
+                            cmd.CommandText = "SELECT * FROM [" + fila.clave + "$]"; // no olivdar incluir el simbolo de peso
+                            cmd.Connection = conn;
+                            da.SelectCommand = cmd;
+                            conn.Open();
+                            da.Fill(ds);
+                            string rango = "", rangoAnterior = "";
 
-                            float t = 0.0f, t1 = 0.0f, t2 = 0.0f, t3 = 0.0f, t4 = 0.0f, t5 = 0.0f, t6 = 0.0f, t7 = 0.0f;
-                            if (total == 5)
-                            {
-                                if (!float.TryParse(fila2[4].ToString(), out t))
-                                    t = -1;
-                           
-                                if (!float.TryParse(fila2[2].ToString(), out t2))
-                                    t2 = 0;
-                                if (!float.TryParse(fila2[3].ToString(), out t3))
-                                    t3 = 0;
-                          
-                            }
-                            if (total == 8)
-                            {
-                                if (!float.TryParse(fila2[6].ToString(), out t))
-                                    t = -1;
-                                if (!float.TryParse(fila2[2].ToString(), out t2))
-                                    t2 = 0;
-                                if (!float.TryParse(fila2[3].ToString(), out t3))
-                                    t3 = 0;
-                                if (!float.TryParse(fila2[4].ToString(), out t4))
-                                    t4 = 0;
-                                if (!float.TryParse(fila2[5].ToString(), out t5))
-                                    t5 = 0;
-                                if (!float.TryParse(fila2[7].ToString(), out t6))
-                                    t6 = 0;
-                              
-                            }
-                            if (total == 9)
-                            {
-                                if (!float.TryParse(fila2[6].ToString(), out t))
-                                    t = -1;
+                            Boolean existeRango = false, existeRango2 = false;
+                            int total = ds.Tables[0].Columns.Count;
+                            fila.columnas = total;
 
-                         
-                                if (!float.TryParse(fila2[2].ToString(), out t2))
-                                    t2 = 0;
-                                if (!float.TryParse(fila2[3].ToString(), out t3))
-                                    t3 = 0;
-                                if (!float.TryParse(fila2[4].ToString(), out t4))
-                                    t4 = 0;
-                                if (!float.TryParse(fila2[5].ToString(), out t5))
-                                    t5 = 0;
-                                if (!float.TryParse(fila2[7].ToString(), out t6))
-                                    t6 = 0;
-                                if (!float.TryParse(fila2[8].ToString(), out t6))
-                                    t7 = 0;
-                            }
-                           
-                            if (t == -1)
+
+                            foreach (DataRow fila2 in ds.Tables[0].Rows)
                             {
-                                if (rango == "")
+
+
+                                float t = 0.0f, t1 = 0.0f, t2 = 0.0f, t3 = 0.0f, t4 = 0.0f, t5 = 0.0f, t6 = 0.0f, t7 = 0.0f;
+                                if (total == 5)
                                 {
-                               
-                                    indice++;
-                                    rango += fila2[0].ToString();
-                                    existeRango = true;
+                                    if (!float.TryParse(fila2[4].ToString(), out t))
+                                        t = -1;
+
+                                    if (!float.TryParse(fila2[2].ToString(), out t2))
+                                        t2 = 0;
+                                    if (!float.TryParse(fila2[3].ToString(), out t3))
+                                        t3 = 0;
+
+                                }
+                                if (total == 8)
+                                {
+                                    if (!float.TryParse(fila2[6].ToString(), out t))
+                                        t = -1;
+                                    if (!float.TryParse(fila2[2].ToString(), out t2))
+                                        t2 = 0;
+                                    if (!float.TryParse(fila2[3].ToString(), out t3))
+                                        t3 = 0;
+                                    if (!float.TryParse(fila2[4].ToString(), out t4))
+                                        t4 = 0;
+                                    if (!float.TryParse(fila2[5].ToString(), out t5))
+                                        t5 = 0;
+                                    if (!float.TryParse(fila2[7].ToString(), out t6))
+                                        t6 = 0;
+
+                                }
+                                if (total == 9)
+                                {
+                                    if (!float.TryParse(fila2[6].ToString(), out t))
+                                        t = -1;
+
+
+                                    if (!float.TryParse(fila2[2].ToString(), out t2))
+                                        t2 = 0;
+                                    if (!float.TryParse(fila2[3].ToString(), out t3))
+                                        t3 = 0;
+                                    if (!float.TryParse(fila2[4].ToString(), out t4))
+                                        t4 = 0;
+                                    if (!float.TryParse(fila2[5].ToString(), out t5))
+                                        t5 = 0;
+                                    if (!float.TryParse(fila2[7].ToString(), out t6))
+                                        t6 = 0;
+                                    if (!float.TryParse(fila2[8].ToString(), out t6))
+                                        t7 = 0;
+                                }
+
+                                if (t == -1)
+                                {
+                                    if (rango == "")
+                                    {
+
+                                        indice++;
+                                        rango += fila2[0].ToString();
+                                        existeRango = true;
+                                    }
+                                    else
+                                        rangoAnterior = fila2[0].ToString();
+
+                                    danado++;
+
+
+                                }
+                                if (t > 0 && existeRango == true)
+                                {
+                                    if (rangoAnterior == "")
+                                        rango += "-" + fila2[0].ToString();
+                                    else
+                                        rango += "-" + rangoAnterior;
+                                    rangoAnterior = "";
+                                    fila.addIntervaloMal(rango);
+
+                                    rango = "";
+                                    rangoAnterior = "";
+                                    existeRango = false;
+                                }
+                                if (t == -1)
+                                {
+                                    t = 0;
+                                    indice2 = indice;
+
                                 }
                                 else
-                                    rangoAnterior = fila2[0].ToString();
+                                    indice2 = -1;
 
-                                danado++;
-                              
+                                if (total == 8)
+                                    fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, t4, t5, t6, indice2));
+                                if (total == 9)
+                                    fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, t4, t5, t6, t7, indice2));
+                                if (total == 5)
+                                    fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, indice2));
 
-                            }
-                            if (t > 0 && existeRango == true)
-                            {
-                                if (rangoAnterior == "")
-                                    rango += "-" + fila2[0].ToString();
-                                else
-                                    rango += "-" + rangoAnterior;
-                                rangoAnterior = "";
-                                fila.addIntervaloMal(rango);
 
-                                rango = "";
-                                rangoAnterior = "";
-                                existeRango = false;
-                            }
-                            if (t == -1)
-                            {
-                                t = 0;
-                                indice2 = indice;
 
                             }
-                            else
-                                indice2 = -1;
-                                
-                            if(total==8)
-                            fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, t4, t5, t6, indice2));
-                            if (total == 9)
-                                fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, t4, t5, t6,t7, indice2));
-                            if(total==5)
-                                fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, indice2));
-                            
-
-
+                            fila.totalDanado = danado;
                         }
-                        fila.totalDanado = danado;
+
+                        catch (Exception ex)
+                        {
+                            //columna 6  
+                            MessageBox.Show(ex.Message);
+                        }
+                        finally
+                        {
+                            conn.Close();
+                            conn.Dispose();
+                        }
+                        conn = null;
+                        cmd = null;
+                        da = null;
+                        ds = null;
+                        indice = -1;
                     }
 
-                    catch (Exception ex)
-                    {
-                        //columna 6  
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally
-                    {
-                        conn.Close();
-                        conn.Dispose();
-                    }
-                     conn = null;
-                     cmd = null;
-                    da = null;
-                     ds = null;
-                    indice = -1;
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message );
-            }
-            finally
-            {
-                
-            }
+                }
+            
+  
         }
 
-        private void columnas()
-        {
-
-        }
 
         private Boolean existe(string termino)
         {
@@ -409,7 +428,7 @@ namespace TheBillionApp
             return false;
         }
 
-        public void getEmpesas(string path)
+        public void getEmpesas(string path ,int index)
         {
             
             var conn = new OleDbConnection();
@@ -438,7 +457,7 @@ namespace TheBillionApp
                                 String[] ex = substrings[1].ToString().Split('<');
                                 String[] ex2 = ex[1].ToString().Split('>');
                                 if(!existe(indice))
-                                empresas.Add(new empresa(indice, ex2[0]));
+                                empresas.Add(new empresa(indice, ex2[0],index));
                                 m += indice + "\n";
                             }
                         }
@@ -452,7 +471,7 @@ namespace TheBillionApp
 
                 }
              //   MessageBox.Show(m);
-                datos(path);
+               // datos(path);
 
 
             }
