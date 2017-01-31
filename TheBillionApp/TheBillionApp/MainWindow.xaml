@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TheBillionApp"
         mc:Ignorable="d"
-        Title="BILLION" Height="768" Width="1366" MinWidth="4" Background="Black" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="BILLION" Height="768" Width="1366" MinWidth="4" Background="Black" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Margin="0,0,0,-3">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -15,16 +15,18 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="139*"/>
-            <RowDefinition Height="120*"/>
-            <RowDefinition Height="499*"/>
+            <RowDefinition Height="136*"/>
+            <RowDefinition Height="115*"/>
+            <RowDefinition Height="491*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1247*"/>
+            <ColumnDefinition Width="85*"/>
+            <ColumnDefinition Width="28*"/>
             <ColumnDefinition Width="0*"/>
 
         </Grid.ColumnDefinitions>
-        <DataGrid ItemsSource="{Binding Customers}" AutoGenerateColumns="False" >
+        <DataGrid ItemsSource="{Binding Customers}" AutoGenerateColumns="False" Grid.ColumnSpan="3" >
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
@@ -38,7 +40,7 @@
 
 
 
-        <Grid HorizontalAlignment="Left" Height="158" VerticalAlignment="Top" Width="1358" Grid.ColumnSpan="2" Margin="0,0,-42,0" Grid.RowSpan="2">
+        <Grid HorizontalAlignment="Left" Height="158" VerticalAlignment="Top" Width="1358" Grid.ColumnSpan="3" Grid.RowSpan="2">
             <Grid.Background>
                 <ImageBrush ImageSource="Images/industry-024.jpg" TileMode="Tile">
                     <ImageBrush.RelativeTransform>
@@ -88,7 +90,7 @@
                   CanUserResizeRows="False"
                   CanUserSortColumns="False"
                   HeadersVisibility="Column"
-                  GridLinesVisibility="None" SelectionUnit="FullRow" Margin="106,100,128,85" Grid.Row="1" Width="1124" Height="419" Grid.RowSpan="2">
+                  GridLinesVisibility="None" SelectionUnit="FullRow" Margin="109,100,14,86" Grid.Row="1" Width="1124" Height="420" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
@@ -145,14 +147,14 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ListView Margin="10" Name="lvDataBinding" ItemsSource="{Binding intervaloMal}" MouseLeftButtonUp="cambio">
-                              
+
                             </ListView>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-               
+
                 </DataGridTemplateColumn>
 
-            
+
 
                 <DataGridTemplateColumn >
                     <DataGridTemplateColumn.Header>
@@ -168,7 +170,7 @@
                 />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                 
+
                 </DataGridTemplateColumn>
 
                 <DataGridTemplateColumn >
@@ -185,7 +187,7 @@
                />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-               
+
                 </DataGridTemplateColumn>
 
                 <DataGridTemplateColumn >
@@ -202,7 +204,7 @@
                />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                 
+
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>

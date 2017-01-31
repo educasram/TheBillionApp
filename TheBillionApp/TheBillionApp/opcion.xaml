@@ -21,7 +21,7 @@
     <Grid Width="200" Margin="0,0,-2,29">
         <RadioButton x:Name="opcion1" Content="LLENAR CON 0" HorizontalAlignment="Left" Margin="31,13,0,0" VerticalAlignment="Top" Background="#FFF5F0F0" Foreground="#FFF9F6F6" BorderBrush="#FFEC3B3B" IsChecked="True"/>
         <RadioButton x:Name="opcion2" Content="LLENAR CON PARECIDO" HorizontalAlignment="Left" Margin="31,33,0,0" VerticalAlignment="Top" Background="#FFF5F0F0" Foreground="#FFF9F6F6" BorderBrush="#FFEC3B3B"/>
-        <Button x:Name="button" Content="GUARDAR" HorizontalAlignment="Left" Margin="54,60,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FF6F9AF7" OpacityMask="#FFD41E1E" Foreground="#FFFDFCFC" FontWeight="Bold" FontSize="14" Click="seleccionado">
+        <Button x:Name="button" Content="GUARDAR" HorizontalAlignment="Left" Margin="63,60,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FF6F9AF7" OpacityMask="#FFD41E1E" Foreground="#FFFDFCFC" FontWeight="Bold" FontSize="14" Click="seleccionado">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
