@@ -181,10 +181,17 @@ namespace TheBillionApp
         private void cargando()
         {
             int con = 0;
+<<<<<<< HEAD
             foreach (string r in rutas)
             {
                 con++;
                 getEmpesas(@r, con);
+=======
+            foreach(string r in rutas)
+            {
+                con++;
+                getEmpesas(@r,con);
+>>>>>>> f63aa754d0cf8b61cc01e05baa57f17c87bb4cfd
             }
 
             datos();
@@ -241,10 +248,6 @@ namespace TheBillionApp
 
             int conta = 0, conta2 = -1;
                 int columnas = 0;
-
-
-
-
                 try
                 {
                     foreach (empresa fila in empresas)
@@ -510,6 +513,11 @@ namespace TheBillionApp
             generarCSV m = new generarCSV();
 
             Boolean b1=m.generar(empresas[seleccionado]);
+        }
+
+        private void verGrafica(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void generadbf(object sender, RoutedEventArgs e)
