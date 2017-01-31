@@ -184,5 +184,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\graph.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

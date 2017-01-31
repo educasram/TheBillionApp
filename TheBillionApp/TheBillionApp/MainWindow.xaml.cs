@@ -174,8 +174,8 @@ namespace TheBillionApp
 
         private void cargando()
         {
-            getEmpesas(@"C:\archivos\IMP");
-            getEmpesas(@"C:\archivos\AUTO");
+            getEmpesas(@getroute1);
+            getEmpesas(@getroute2);
             getFecha();
             //ver();
             llenado();
