@@ -42,6 +42,11 @@ namespace TheBillionApp
             fr.Show();
             // AdminPanel ap = new AdminPanel();
             //ap.Show();
+
+            this.Hide();
+
+            //getfileroutes();
+
             this.Hide();          
 
 
