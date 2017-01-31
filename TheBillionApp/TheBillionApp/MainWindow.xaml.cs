@@ -36,6 +36,7 @@ namespace TheBillionApp
         public MainWindow()
         {
             InitializeComponent();
+            empresas = new List<empresa>();
 
             Fileroute fr = new Fileroute(this);
             fr.Show();
@@ -168,7 +169,8 @@ namespace TheBillionApp
 
         private void cargando()
         {
-            getEmpesas();
+            getEmpesas(@"C:\archivos\IMP");
+            getEmpesas(@"C:\archivos\AUTO");
             getFecha();
             //ver();
             llenado();
@@ -212,7 +214,7 @@ namespace TheBillionApp
 
 
      
-        private void datos()
+        private void datos(string path)
         {//Local Time	kVARh Q1	kVARh Q4	kWh del E
             /* falta case para cuando la empresa no tienen todas las columnas o no tienen ningun registro*/
             int conta = 0,conta2=-1;
@@ -234,7 +236,7 @@ namespace TheBillionApp
                     try
                     {
 
-                        conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + @"C:\archivos\IMP" + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
+                        conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
                         int danado = 0;
                         cmd.CommandText = "SELECT * FROM [" + fila.clave + "$]"; // no olivdar incluir el simbolo de peso
                         cmd.Connection = conn;
@@ -402,9 +404,9 @@ namespace TheBillionApp
             return false;
         }
 
-        public void getEmpesas()
+        public void getEmpesas(string path)
         {
-            empresas = new List<empresa>();
+            
             var conn = new OleDbConnection();
             var cmd = new OleDbCommand();
             var da = new OleDbDataAdapter();
@@ -413,7 +415,7 @@ namespace TheBillionApp
             try
             {
 
-                conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + @"C:\archivos\IMP" + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
+                conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
                 cmd.CommandText = "SELECT * FROM [|PRIVATE|Status$]"; // no olivdar incluir el simbolo de peso
                 cmd.Connection = conn;
                 da.SelectCommand = cmd;
@@ -438,13 +440,14 @@ namespace TheBillionApp
                             
 
                     }
-                    
+
+                  
 
 
 
                 }
              //   MessageBox.Show(m);
-                datos();
+                datos(path);
 
 
             }
