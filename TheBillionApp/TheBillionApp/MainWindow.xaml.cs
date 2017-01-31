@@ -47,8 +47,6 @@ namespace TheBillionApp
 
             //getfileroutes();
 
-            this.Hide();          
-
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 5);

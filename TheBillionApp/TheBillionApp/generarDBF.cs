@@ -17,7 +17,7 @@ namespace TheBillionApp
         }
         public void generar(empresa e)
         {
-            string ruta = @"C:\archivos";
+            string ruta = @Fileroute.newroute;
             string strConnDbase = @"Provider = Microsoft.Jet.OLEDB.4.0" +
                                    ";Data Source = " + ruta +
                                    ";Extended Properties = dBASE IV" +
