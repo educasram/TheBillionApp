@@ -54,8 +54,6 @@ namespace TheBillionApp
 
             //getfileroutes();
 
-            this.Hide();          
-
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
@@ -181,17 +179,8 @@ namespace TheBillionApp
 
         private void cargando()
         {
-            int i = 0;
-            foreach(string ruta1 in rutas)
-            {
-                i++;
-                getEmpesas(ruta1,i);
-            }
-            
-           // getEmpesas(getroute2);
-            datos();
-           
-
+            getEmpesas(@"C:\archivos\IMP");
+            getEmpesas(@"C:\archivos\AUTO");
             getFecha();
             //ver();
               llenado();
