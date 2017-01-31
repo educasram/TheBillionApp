@@ -21,10 +21,12 @@ namespace TheBillionApp
     {
         
         public static string route1, route2, newroute;
+        MainWindow xx;
 
-        public Fileroute()
+        public Fileroute(MainWindow x)
         {
             InitializeComponent();
+            xx = x;
           
 
 
@@ -41,12 +43,14 @@ namespace TheBillionApp
             route2 = getroute2.Text;
             newroute = getnewroute.Text;
 
-            MainWindow mw = new MainWindow();
-            mw.getroute1 = route1;
-            mw.getroute2 = route2;
-            mw.getnewroute = newroute;
-            this.Hide();
-            mw.Show();
+   
+            xx.getroute1 = route1;
+            xx.getroute2 = route2;
+            xx.getnewroute = newroute;
+            xx.Show();
+
+            this.Close();
+        
 
 
         }

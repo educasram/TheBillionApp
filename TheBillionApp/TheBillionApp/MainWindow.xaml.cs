@@ -32,17 +32,16 @@ namespace TheBillionApp
         public string getroute1,getroute2,getnewroute;
         public int totalIntervalos, seleccionado = -1, seleccionLista = -1, opt = 0;
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        Fileroute fr = new Fileroute();
+        
         public MainWindow()
         {
             InitializeComponent();
 
-            
+            Fileroute fr = new Fileroute(this);
             fr.Show();
             // AdminPanel ap = new AdminPanel();
             //ap.Show();
-            this.Hide();
-            
+            this.Hide();          
 
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
