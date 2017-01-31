@@ -166,7 +166,7 @@
                 HorizontalAlignment="Left"
                 Margin="10,10,0,0"
                 VerticalAlignment="Top"
-                Width="75"
+                Width="75" Click="generadbf"
                 />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

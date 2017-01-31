@@ -17,6 +17,9 @@ using System.Windows.Shapes;
 using System.IO.Compression;
 using System.Threading;
 
+
+
+
 namespace TheBillionApp
 {
    
@@ -39,7 +42,8 @@ namespace TheBillionApp
             // AdminPanel ap = new AdminPanel();
             //ap.Show();
             this.Hide();
-            
+
+            //getfileroutes();
 
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -136,8 +140,13 @@ namespace TheBillionApp
 
      
         private void datos()
-        {
-          
+        {//Local Time	kVARh Q1	kVARh Q4	kWh del E
+            /* falta case para cuando la empresa no tienen todas las columnas o no tienen ningun registro*/
+            int conta = 0,conta2=-1;
+            int columnas = 0;
+
+
+
             try
             {          
                 foreach (empresa fila in empresas)
@@ -146,10 +155,10 @@ namespace TheBillionApp
                     var cmd = new OleDbCommand();
                     var da = new OleDbDataAdapter();
                     var ds = new DataSet();
-
+                    conta2++;
                     try
                     {
-                        
+
                         conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + @"C:\archivos\IMP" + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
                         int danado = 0;
                         cmd.CommandText = "SELECT * FROM [" + fila.clave + "$]"; // no olivdar incluir el simbolo de peso
@@ -158,29 +167,68 @@ namespace TheBillionApp
                         conn.Open();
                         da.Fill(ds);
 
-                        
+
                         string rango = "", rangoAnterior = "";
+
                         Boolean existeRango = false, existeRango2 = false;
+                        int total= ds.Tables[0].Columns.Count;
+                        fila.columnas = total;
+
 
                         foreach (DataRow fila2 in ds.Tables[0].Rows)
                         {
-                            float t = 0.0f, t1 = 0.0f, t2 = 0.0f, t3 = 0.0f, t4 = 0.0f, t5 = 0.0f, t6 = 0.0f;
-                            if (!float.TryParse(fila2[6].ToString(), out t))
-                                t = -1;
-                    
 
-                            if (!float.TryParse(fila2[1].ToString(), out t1))
-                                t1 = 0;
-                            if (!float.TryParse(fila2[2].ToString(), out t2))
-                                t2 = 0;
-                            if (!float.TryParse(fila2[3].ToString(), out t3))
-                                t3 = 0;
-                            if (!float.TryParse(fila2[4].ToString(), out t4))
-                                t4 = 0;
-                            if (!float.TryParse(fila2[5].ToString(), out t5))
-                                t5 = 0;
-                            if (!float.TryParse(fila2[7].ToString(), out t6))
-                                t6 = 0;
+
+                            float t = 0.0f, t1 = 0.0f, t2 = 0.0f, t3 = 0.0f, t4 = 0.0f, t5 = 0.0f, t6 = 0.0f, t7 = 0.0f;
+                            if (total == 5)
+                            {
+                                if (!float.TryParse(fila2[4].ToString(), out t))
+                                    t = -1;
+                           
+                                if (!float.TryParse(fila2[2].ToString(), out t2))
+                                    t2 = 0;
+                                if (!float.TryParse(fila2[3].ToString(), out t3))
+                                    t3 = 0;
+                          
+                            }
+                            if (total == 8)
+                            {
+                                if (!float.TryParse(fila2[6].ToString(), out t))
+                                    t = -1;
+
+                              
+                                if (!float.TryParse(fila2[2].ToString(), out t2))
+                                    t2 = 0;
+                                if (!float.TryParse(fila2[3].ToString(), out t3))
+                                    t3 = 0;
+                                if (!float.TryParse(fila2[4].ToString(), out t4))
+                                    t4 = 0;
+                                if (!float.TryParse(fila2[5].ToString(), out t5))
+                                    t5 = 0;
+                                if (!float.TryParse(fila2[7].ToString(), out t6))
+                                    t6 = 0;
+                              
+                            }
+                            if (total == 9)
+                            {
+                                if (!float.TryParse(fila2[6].ToString(), out t))
+                                    t = -1;
+
+                         
+                                if (!float.TryParse(fila2[2].ToString(), out t2))
+                                    t2 = 0;
+                                if (!float.TryParse(fila2[3].ToString(), out t3))
+                                    t3 = 0;
+                                if (!float.TryParse(fila2[4].ToString(), out t4))
+                                    t4 = 0;
+                                if (!float.TryParse(fila2[5].ToString(), out t5))
+                                    t5 = 0;
+                                if (!float.TryParse(fila2[7].ToString(), out t6))
+                                    t6 = 0;
+                                if (!float.TryParse(fila2[8].ToString(), out t6))
+                                    t7 = 0;
+                            }
+                           
                             if (t == -1)
                             {
                                 if (rango == "")
@@ -197,33 +245,33 @@ namespace TheBillionApp
                             }
                             if (t > 0 && existeRango == true)
                             {
-                                if(rangoAnterior=="")
-                                    rango += "-" + fila2[0].ToString(); 
+                                if (rangoAnterior == "")
+                                    rango += "-" + fila2[0].ToString();
                                 else
-                                rango += "-" + rangoAnterior;
+                                    rango += "-" + rangoAnterior;
                                 rangoAnterior = "";
                                 fila.addIntervaloMal(rango);
-             
+
                                 rango = "";
                                 rangoAnterior = "";
                                 existeRango = false;
                             }
-                            fila.setLectura(new lectura(fila2[0].ToString(), t,t1,t2,t3,t4,t5,t6));
+                            if(total==8)
+                            fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, t4, t5, t6));
+                            if (total == 9)
+                                fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3, t4, t5, t6,t7));
+                            if(total==5)
+                                fila.setLectura(new lectura(fila2[0].ToString(), t, t2, t3));
+
 
                         }
-                        fila.setTotalDano(danado);
-                        if (danado > 0)
-                        { fila.setDanoa(true); }
-
-                        danado = 0;
-
-                        
-
-                        //  MessageBox.Show(lista);
+                        fila.totalDanado = danado;
                     }
+
                     catch (Exception ex)
                     {
-                      //  MessageBox.Show(ex.Message);
+                        //columna 6  
+                        MessageBox.Show(ex.Message);
                     }
                     finally
                     {
@@ -239,12 +287,17 @@ namespace TheBillionApp
             }
             catch (Exception ex)
             {
-             //   MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message );
             }
             finally
             {
                 
             }
+        }
+
+        private void columnas()
+        {
+
         }
 
         private Boolean existe(string termino)
@@ -350,6 +403,21 @@ namespace TheBillionApp
             generarCSV m = new generarCSV();
 
             Boolean b1=m.generar(empresas[seleccionado]);
+        }
+
+        private void generadbf(object sender, RoutedEventArgs e)
+        {
+            seleccionado = tabla.SelectedIndex;
+            Button btn = (Button)e.Source;
+            btn.IsEnabled = false;
+            Thread te = new Thread(generaDBF);
+            te.Start();
+        }
+
+        private void generaDBF()
+        {
+            generarDBF m = new generarDBF();
+             m.generar(empresas[seleccionado]);
         }
 
         private void cambio(object sender, MouseButtonEventArgs e)

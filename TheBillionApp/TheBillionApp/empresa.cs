@@ -10,14 +10,13 @@ namespace TheBillionApp
     {
         public string clave { get; set; }
         public string nombre { get; set; }
-        public Boolean genero0 { get; set; }
-        public Boolean generoDBF { get; set; }
-        public Boolean generoXLS { get; set; }
-        public Boolean generoCSV { get; set; }
+
         public List<lectura> lista { get; set; }
         public List<string> intervaloMal { get; set; }
         public Boolean danado { get; set; }
         public int totalDanado { get; set; }
+        public int columnas { get; set; }
+        public Boolean tieneRegistros { get; set; }
         public empresa(string c, string n)
         {
             nombre = n;
@@ -26,10 +25,8 @@ namespace TheBillionApp
             intervaloMal = new List<string>();
             danado = false;
             totalDanado = 0;
-            genero0 = false;
-            generoDBF = false;
-            generoXLS = false;
-            generoCSV = false;
+            tieneRegistros = false;
+            columnas = 0;
 
 
 
