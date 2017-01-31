@@ -1,12 +1,21 @@
-﻿<Window x:Class="TheBillionApp.grafica"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TheBillionApp"
+        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Name="grafica1" x:Class="TheBillionApp.grafica"
         mc:Ignorable="d"
-        Title="grafica" Height="300" Width="300">
+        Title="grafica" Height="300" Width="650.877">
     <Grid>
-        
+        <chartingToolkit:Chart HorizontalAlignment="Left" Margin="122,119,0,0" Title="Chart Title" VerticalAlignment="Top">
+            <chartingToolkit:Chart.DataContext>
+                <PointCollection>1,10 2,20 3,30 4,40</PointCollection>
+            </chartingToolkit:Chart.DataContext>
+            <chartingToolkit:ColumnSeries DependentValuePath="X" IndependentValuePath="Y" ItemsSource="{Binding}"/>
+        </chartingToolkit:Chart>
+
+
     </Grid>
+    
 </Window>

@@ -22,6 +22,8 @@ namespace TheBillionApp
         public grafica()
         {
             InitializeComponent();
+           
+
         }
     }
 }

@@ -22,26 +22,26 @@ using System.Threading;
 
 namespace TheBillionApp
 {
-   
+
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         private List<empresa> empresas;
-        public string getroute1,getroute2,getnewroute;
+        public string getroute1, getroute2, getnewroute;
         public int totalIntervalos, seleccionado = -1, seleccionLista = -1, opt = 0;
         public List<string> rutas;
-        
+
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        
+
         public MainWindow()
         {
             InitializeComponent();
             empresas = new List<empresa>();
             rutas = new List<string>();
-           
-        
+
+
 
             Fileroute fr = new Fileroute(this);
             fr.Show();
@@ -56,24 +56,24 @@ namespace TheBillionApp
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             dispatcherTimer.Start();
-           
+
         }
         public void getfileroutes()
-        {         
+        {
             getroute1 = Fileroute.route1;
             getroute2 = Fileroute.route2;
             getnewroute = Fileroute.newroute;
             rutas.Add(@getroute1);
             rutas.Add(@getroute2);
-          
+
             MessageBox.Show(getroute1);
 
         }
-   
+
         public void cambioLlenado(int a)
         {
 
-            
+
             opt = a;
             string t1 = empresas[tabla.SelectedIndex].intervaloMal[seleccionLista];
             string[] tt = t1.Split('-');
@@ -113,8 +113,8 @@ namespace TheBillionApp
                 {
                     if (li2.index == seleccionLista)
                     {
-                         t1 = li2.fecha;
-                     
+                        t1 = li2.fecha;
+
                         string te = t1.Substring(0, 2);
                         int dia = 0;
                         int.TryParse(te, out dia);
@@ -156,7 +156,7 @@ namespace TheBillionApp
                                 empresas[tabla.SelectedIndex].lista[pos2].q3 = l1.q3;
                                 empresas[tabla.SelectedIndex].lista[pos2].q4 = l1.q4;
                                 empresas[tabla.SelectedIndex].lista[pos2].r = l1.r;
-                               
+
                             }
 
                         }
@@ -165,9 +165,9 @@ namespace TheBillionApp
                     }
                 }
             }
-        
-                
-            
+
+
+
         }
 
 
@@ -181,72 +181,67 @@ namespace TheBillionApp
         private void cargando()
         {
             int con = 0;
-<<<<<<< HEAD
+
             foreach (string r in rutas)
             {
                 con++;
                 getEmpesas(@r, con);
-=======
-            foreach(string r in rutas)
-            {
-                con++;
-                getEmpesas(@r,con);
->>>>>>> f63aa754d0cf8b61cc01e05baa57f17c87bb4cfd
+
             }
 
-            datos();
-            getFecha();
-            //ver();
-            llenado();
+                datos();
+                getFecha();
+                //ver();
+                llenado();
 
-        }
+            }
 
-        private void generar()
-        {
-            generarExcel m = new generarExcel(empresas);
-    
-            m.generarEmpresa(empresas[seleccionado]);
+            private void generar()
+            {
+                generarExcel m = new generarExcel(empresas);
 
-        }
-        public void ver()
-        {
+                m.generarEmpresa(empresas[seleccionado]);
 
-            string l = "";
-            empresa tem = empresas[0];
-            MessageBox.Show(tem.nombre);
-        }
-        private void llenado()
-        {//
-            
-            tabla.ItemsSource = empresas;
-        }
+            }
+            public void ver()
+            {
 
-    
+                string l = "";
+                empresa tem = empresas[0];
+                MessageBox.Show(tem.nombre);
+            }
+            private void llenado()
+            {//
+
+                tabla.ItemsSource = empresas;
+            }
+
+
             void MakeButton(object sender, RoutedEventArgs e)
             {
-            seleccionado = tabla.SelectedIndex;
-        
-          
-            Button btn = (Button)e.Source;
-            btn.IsEnabled = false;
+                seleccionado = tabla.SelectedIndex;
+
+
+                Button btn = (Button)e.Source;
+                btn.IsEnabled = false;
 
 
 
-            Thread te = new Thread(generar);
-             te.Start();
+                Thread te = new Thread(generar);
+                te.Start();
 
             }
 
 
-     
-        private void datos()
-        {//Local Time	kVARh Q1	kVARh Q4	kWh del E
-         /* falta case para cuando la empresa no tienen todas las columnas o no tienen ningun registro*/
-            string r1 = rutas[0];
-            string r2 = rutas[1];
+
+            private void datos()
+            {//Local Time	kVARh Q1	kVARh Q4	kWh del E
+             /* falta case para cuando la empresa no tienen todas las columnas o no tienen ningun registro*/
+                string r1 = rutas[0];
+                string r2 = rutas[1];
 
 
-            int conta = 0, conta2 = -1;
+                int conta = 0, conta2 = -1;
                 int columnas = 0;
                 try
                 {
@@ -261,7 +256,7 @@ namespace TheBillionApp
                         try
                         {
 
-                            conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +(fila.index==1?r1:r2) + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
+                            conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + (fila.index == 1 ? r1 : r2) + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
                             int danado = 0;
                             cmd.CommandText = "SELECT * FROM [" + fila.clave + "$]"; // no olivdar incluir el simbolo de peso
                             cmd.Connection = conn;
@@ -404,166 +399,166 @@ namespace TheBillionApp
                 {
 
                 }
-            
-  
-        }
 
 
-        private Boolean existe(string termino)
-        {
-            int pos = -1;
-            int conta = -1;
-
-            foreach(empresa e in empresas)
-            {
-                conta++;
-                if (e.clave == termino)
-                    return true;
-
-                              
             }
 
 
-            return false;
-        }
-
-        public void getEmpesas(string path ,int index)
-        {
-            
-            var conn = new OleDbConnection();
-            var cmd = new OleDbCommand();
-            var da = new OleDbDataAdapter();
-            var ds = new DataSet();
-            string indice, nombre, m = "";
-            try
+            private Boolean existe(string termino)
             {
+                int pos = -1;
+                int conta = -1;
 
-                conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
-                cmd.CommandText = "SELECT * FROM [|PRIVATE|Status$]"; // no olivdar incluir el simbolo de peso
-                cmd.Connection = conn;
-                da.SelectCommand = cmd;
-                conn.Open();
-                da.Fill(ds);
-                foreach (DataRow fila2 in ds.Tables[0].Rows)
+                foreach (empresa e in empresas)
                 {
-                    String[] substrings = fila2[1].ToString().Split(':');
-                    if(!substrings[0].Equals("Starting report"))
-                    {
-                        indice = substrings[0];
-                        if (substrings.Length > 1)
-                        {
-                            if (substrings[1].Contains("<")){
-                                String[] ex = substrings[1].ToString().Split('<');
-                                String[] ex2 = ex[1].ToString().Split('>');
-                                if(!existe(indice))
-                                empresas.Add(new empresa(indice, ex2[0],index));
-                                m += indice + "\n";
-                            }
-                        }
-                            
-
-                    }
-
-                  
-
+                    conta++;
+                    if (e.clave == termino)
+                        return true;
 
 
                 }
-             //   MessageBox.Show(m);
-               // datos(path);
 
 
+                return false;
             }
-            catch (Exception er) { MessageBox.Show(er.ToString());}
-            finally
+
+            public void getEmpesas(string path, int index)
             {
-                conn.Close();
-                conn.Dispose();
+
+                var conn = new OleDbConnection();
+                var cmd = new OleDbCommand();
+                var da = new OleDbDataAdapter();
+                var ds = new DataSet();
+                string indice, nombre, m = "";
+                try
+                {
+
+                    conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path + ";Mode=Read;Extended Properties=Excel 8.0;Persist Security Info=False;";
+                    cmd.CommandText = "SELECT * FROM [|PRIVATE|Status$]"; // no olivdar incluir el simbolo de peso
+                    cmd.Connection = conn;
+                    da.SelectCommand = cmd;
+                    conn.Open();
+                    da.Fill(ds);
+                    foreach (DataRow fila2 in ds.Tables[0].Rows)
+                    {
+                        String[] substrings = fila2[1].ToString().Split(':');
+                        if (!substrings[0].Equals("Starting report"))
+                        {
+                            indice = substrings[0];
+                            if (substrings.Length > 1)
+                            {
+                                if (substrings[1].Contains("<")) {
+                                    String[] ex = substrings[1].ToString().Split('<');
+                                    String[] ex2 = ex[1].ToString().Split('>');
+                                    if (!existe(indice))
+                                        empresas.Add(new empresa(indice, ex2[0], index));
+                                    m += indice + "\n";
+                                }
+                            }
+
+
+                        }
+
+
+
+
+
+                    }
+                    //   MessageBox.Show(m);
+                    // datos(path);
+
+
+                }
+                catch (Exception er) { MessageBox.Show(er.ToString()); }
+                finally
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
             }
-        }
 
-        private void generarxls(object sender, RoutedEventArgs e)
-        {
-            seleccionado = tabla.SelectedIndex;
-
-
-            Button btn = (Button)e.Source;
-            btn.IsEnabled = false;
+            private void generarxls(object sender, RoutedEventArgs e)
+            {
+                seleccionado = tabla.SelectedIndex;
 
 
-
-            Thread te = new Thread(generar);
-            te.Start();
-        }
-
-        private void generacsv(object sender, RoutedEventArgs e)
-        {
-            seleccionado = tabla.SelectedIndex;
+                Button btn = (Button)e.Source;
+                btn.IsEnabled = false;
 
 
-            Button btn = (Button)e.Source;
-            btn.IsEnabled = false;
 
-            Thread te = new Thread(generacsv);
-            te.Start();
-        }
+                Thread te = new Thread(generar);
+                te.Start();
+            }
 
-        private void generacsv()
-        {
-            generarCSV m = new generarCSV();
+            private void generacsv(object sender, RoutedEventArgs e)
+            {
+                seleccionado = tabla.SelectedIndex;
 
-            Boolean b1=m.generar(empresas[seleccionado]);
-        }
 
-        private void verGrafica(object sender, RoutedEventArgs e)
-        {
+                Button btn = (Button)e.Source;
+                btn.IsEnabled = false;
 
-        }
+                Thread te = new Thread(generacsv1);
+                te.Start();
+            }
 
-        private void generadbf(object sender, RoutedEventArgs e)
-        {
-            seleccionado = tabla.SelectedIndex;
-            Button btn = (Button)e.Source;
-            btn.IsEnabled = false;
-            Thread te = new Thread(generaDBF);
-            te.Start();
-        }
+            private void generacsv1()
+            {
+                generarCSV m = new generarCSV();
 
-        private void generaDBF()
-        {
-            generarDBF m = new generarDBF();
-             m.generar(empresas[seleccionado]);
-        }
+                Boolean b1 = m.generar(empresas[seleccionado]);
+            }
 
-        private void cambio(object sender, MouseButtonEventArgs e)
-        {
+            private void verGrafica(object sender, RoutedEventArgs e)
+            {
 
-            ListView btn = (ListView)sender;
-            seleccionLista = btn.SelectedIndex;
-            opcion opc = new opcion(this);
-            opc.Show();
-        }
+            }
 
-        public void getFecha()
-        {
-            string fecha;
-            fecha = "";
-            lectura tem = empresas[0].getElementoLectura(0);
-            fecha = tem.fecha;
-            string[] f = fecha.Split('/');
-            string[] m = f[2].Split(' ');
-            int a, b;
-            int.TryParse(m[0], out b);
-            int.TryParse(f[1], out a);
-            int dias = System.DateTime.DaysInMonth(b, a);
-            totalIntervalos = (((60 / 5) * 24) * dias);
-                    
+            private void generadbf(object sender, RoutedEventArgs e)
+            {
+                seleccionado = tabla.SelectedIndex;
+                Button btn = (Button)e.Source;
+                btn.IsEnabled = false;
+                Thread te = new Thread(generaDBF);
+                te.Start();
+            }
 
-        }
+            private void generaDBF()
+            {
+                generarDBF m = new generarDBF();
+                m.generar(empresas[seleccionado]);
+            }
 
-        private void tabla_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+            private void cambio(object sender, MouseButtonEventArgs e)
+            {
 
+                ListView btn = (ListView)sender;
+                seleccionLista = btn.SelectedIndex;
+                opcion opc = new opcion(this);
+                opc.Show();
+            }
+
+            public void getFecha()
+            {
+                string fecha;
+                fecha = "";
+                lectura tem = empresas[0].getElementoLectura(0);
+                fecha = tem.fecha;
+                string[] f = fecha.Split('/');
+                string[] m = f[2].Split(' ');
+                int a, b;
+                int.TryParse(m[0], out b);
+                int.TryParse(f[1], out a);
+                int dias = System.DateTime.DaysInMonth(b, a);
+                totalIntervalos = (((60 / 5) * 24) * dias);
+
+
+            }
+
+           
         }
     }
-}
+
+
+
