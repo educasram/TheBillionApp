@@ -14,11 +14,7 @@ namespace TheBillionApp
         public static string getnewroute4;
         public generarExcel(List<empresa> empresas)
         {
-            this.empresas = empresas;
-               string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\archivos\TestSO1.xls;Extended Properties=""Excel 8.0;HDR=NO;""";
-                DbProviderFactory factory =
-                  DbProviderFactories.GetFactory("System.Data.OleDb");
-
+    
               
             
         }
@@ -26,9 +22,11 @@ namespace TheBillionApp
         public Boolean generarEmpresa(empresa e)
         {
 
-            string nombre = e.clave + ".xls";
+            string nombre =@"\"+ e.clave + ".xls";
             getnewroute4 = @Fileroute.newroute;
+
             string ruta = getnewroute4;
+       
             string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+ruta + nombre +" ;Extended Properties='';Excel 8.0;HDR=NO;";
 
             string connectionString = con;

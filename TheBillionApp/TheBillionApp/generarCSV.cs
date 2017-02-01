@@ -127,7 +127,7 @@ namespace TheBillionApp
                 {
                     string csvFile = e.clave + ".csv";
                    
-                    string csvFilePath = getnewroute3 + csvFile;
+                    string csvFilePath = getnewroute3+@"\" + csvFile;
                     using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
                     {
                         sw.Write(tmpCSV.ToString());

@@ -106,9 +106,9 @@ namespace TheBillionApp
                         break;
                     }
 
-                    tem.Add(l1);
+                   // tem.Add(l1);
                 }
-                empresas[tabla.SelectedIndex].setListaLectura(tem);
+               // empresas[tabla.SelectedIndex].setListaLectura(tem);
             }
             if (opt == 2)
             {
@@ -488,9 +488,6 @@ namespace TheBillionApp
 
                 Button btn = (Button)e.Source;
                 btn.IsEnabled = false;
-
-
-
                 Thread te = new Thread(generar);
                 te.Start();
             }
