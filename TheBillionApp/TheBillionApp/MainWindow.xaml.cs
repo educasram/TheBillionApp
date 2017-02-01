@@ -74,6 +74,11 @@ namespace TheBillionApp
 
         }
 
+        public void colorear()
+        {
+           
+        }
+
         public void cambioLlenado(int a)
         {
 
@@ -511,7 +516,35 @@ namespace TheBillionApp
                 Boolean b1 = m.generar(empresas[seleccionado]);
             }
 
-            private void verGrafica(object sender, RoutedEventArgs e)
+        private void buscar(object sender, KeyEventArgs e)
+        {
+
+            int index = -1;
+
+            foreach(empresa em in empresas)
+            {
+                index++;
+                
+                if (em.clave.Contains(busca.Text))
+                    {
+                    try
+                    {
+
+                        tabla.SelectedIndex = index;
+                        DataGridRow row = (DataGridRow)tabla.ItemContainerGenerator.ContainerFromIndex(index);
+                        row.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                    }
+                    catch (Exception er) { }
+
+
+
+                }
+            }
+         
+      
+        }
+
+        private void verGrafica(object sender, RoutedEventArgs e)
             {
 
             }

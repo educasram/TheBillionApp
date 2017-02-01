@@ -40,7 +40,7 @@
 
 
 
-        <Grid HorizontalAlignment="Left" Height="158" VerticalAlignment="Top" Width="1358" Grid.ColumnSpan="3" Grid.RowSpan="2">
+        <Grid HorizontalAlignment="center" Height="158" VerticalAlignment="Top" Width="1358" Grid.ColumnSpan="3" Grid.RowSpan="2">
             <Grid.Background>
                 <ImageBrush ImageSource="Images/industry-024.jpg" TileMode="Tile">
                     <ImageBrush.RelativeTransform>
@@ -61,7 +61,7 @@
                     <ImageBrush ImageSource="Images/logo.png" Stretch="UniformToFill"/>
                 </Grid.Background>
             </Grid>
-            <TextBox HorizontalAlignment="Left" Height="37" Margin="958,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" BorderBrush="#FF00B9FF" FontSize="30" TextDecorations="{x:Null}" Cursor="Help" RenderTransformOrigin="0.5,0.5"/>
+            <TextBox x:Name="busca" HorizontalAlignment="Left" Height="37" Margin="958,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" BorderBrush="#FF00B9FF" FontSize="30" TextDecorations="{x:Null}" Cursor="Help" RenderTransformOrigin="0.5,0.5" KeyUp="buscar"/>
             <Button Content="" HorizontalAlignment="Left" Margin="1294,58,0,0" VerticalAlignment="Top" Width="40" Height="37" Foreground="#FF054C87" BorderBrush="#FF001663">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/lookup_icon.png" Stretch="Uniform"/>
@@ -90,10 +90,10 @@
                   CanUserResizeRows="False"
                   CanUserSortColumns="False"
                   HeadersVisibility="Column"
-                  GridLinesVisibility="None" SelectionUnit="FullRow" Margin="109,100,14,86" Grid.Row="1" Width="1124" Height="420" Grid.RowSpan="2">
+                  GridLinesVisibility="None" SelectionUnit="FullRow" Margin="106,97,17,89" Grid.Row="1" Width="1124" Height="420" Grid.RowSpan="2">
             <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.Header>
+                <DataGridTemplateColumn Width="130">
+                    <DataGridTemplateColumn.Header >
                         <TextBlock  Text="SERVICIO" />
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
@@ -108,8 +108,8 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn >
-                    <DataGridTemplateColumn.Header>
+                <DataGridTemplateColumn Width="190">
+                    <DataGridTemplateColumn.Header  >
                         <TextBlock  Text="NOMBRE"  />
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
@@ -124,7 +124,7 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn >
+                <DataGridTemplateColumn Width="200" >
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="NO DE INTERVALOS"  />
                     </DataGridTemplateColumn.Header>
@@ -140,7 +140,7 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn >
+                <DataGridTemplateColumn Width="200">
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="INTERVALOS CON FALLA"  />
                     </DataGridTemplateColumn.Header>
@@ -155,7 +155,7 @@
                 </DataGridTemplateColumn>
 
 
-                <DataGridTemplateColumn >
+                <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="GRAFICA"  />
                     </DataGridTemplateColumn.Header>
@@ -175,7 +175,7 @@
 
 
 
-                <DataGridTemplateColumn >
+                <DataGridTemplateColumn Width="80">
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="DBF"  />
                     </DataGridTemplateColumn.Header>
@@ -192,7 +192,7 @@
 
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn >
+                <DataGridTemplateColumn Width="80">
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="XLS"  />
                     </DataGridTemplateColumn.Header>
@@ -209,7 +209,7 @@
 
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn >
+                <DataGridTemplateColumn Width="80">
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="CSV"  />
                     </DataGridTemplateColumn.Header>
