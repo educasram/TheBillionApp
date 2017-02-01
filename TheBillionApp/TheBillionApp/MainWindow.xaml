@@ -61,8 +61,8 @@
                     <ImageBrush ImageSource="Images/logo.png" Stretch="UniformToFill"/>
                 </Grid.Background>
             </Grid>
-            <TextBox x:Name="busca" HorizontalAlignment="Left" Height="37" Margin="958,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" BorderBrush="#FF00B9FF" FontSize="30" TextDecorations="{x:Null}" Cursor="Help" RenderTransformOrigin="0.5,0.5" KeyUp="buscar"/>
-            <Button Content="" HorizontalAlignment="Left" Margin="1294,58,0,0" VerticalAlignment="Top" Width="40" Height="37" Foreground="#FF054C87" BorderBrush="#FF001663">
+            <TextBox x:Name="busca" HorizontalAlignment="Left" Height="37" Margin="958,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" BorderBrush="#FF00B9FF" FontSize="30" TextDecorations="{x:Null}" Cursor="Help" RenderTransformOrigin="0.5,0.5"/>
+            <Button Content="" HorizontalAlignment="Left" Margin="1294,58,0,0" VerticalAlignment="Top" Width="40" Height="37" Foreground="#FF054C87" BorderBrush="#FF001663" Click="aBuscar">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/lookup_icon.png" Stretch="Uniform"/>
                 </Button.Background>
@@ -90,7 +90,7 @@
                   CanUserResizeRows="False"
                   CanUserSortColumns="False"
                   HeadersVisibility="Column"
-                  GridLinesVisibility="None" SelectionUnit="FullRow" Margin="106,97,17,89" Grid.Row="1" Width="1124" Height="420" Grid.RowSpan="2">
+                  GridLinesVisibility="None" SelectionUnit="FullRow" Margin="113,97,10,89" Grid.Row="1" Width="1124" Height="420" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="130">
                     <DataGridTemplateColumn.Header >
