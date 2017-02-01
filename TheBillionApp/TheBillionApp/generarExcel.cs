@@ -11,6 +11,7 @@ namespace TheBillionApp
     class generarExcel
     {
         List<empresa> empresas;
+        public static string getnewroute4;
         public generarExcel(List<empresa> empresas)
         {
             this.empresas = empresas;
@@ -26,7 +27,9 @@ namespace TheBillionApp
         {
 
             string nombre = e.clave + ".xls";
-            string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=@Fileroute.newroute" + nombre +" ;Extended Properties='';Excel 8.0;HDR=NO;";
+            getnewroute4 = @Fileroute.newroute;
+            string ruta = getnewroute4;
+            string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+ruta + nombre +" ;Extended Properties='';Excel 8.0;HDR=NO;";
 
             string connectionString = con;
             DbProviderFactory factory =

@@ -32,6 +32,7 @@ namespace TheBillionApp
         public string getroute1, getroute2, getnewroute;
         public int totalIntervalos, seleccionado = -1, seleccionLista = -1, opt = 0;
         public List<string> rutas;
+        
 
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
@@ -63,7 +64,8 @@ namespace TheBillionApp
             getroute1 = Fileroute.route1;
             getroute2 = Fileroute.route2;
             getnewroute = Fileroute.newroute;
-            MessageBox.Show(getnewroute);
+           
+
             rutas.Add(@getroute1);
             rutas.Add(@getroute2);
             cargando();
