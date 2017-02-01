@@ -84,98 +84,100 @@ namespace TheBillionApp
 
 
             opt = a;
-            string t1 = empresas[tabla.SelectedIndex].intervaloMal[seleccionLista];
-            string[] tt = t1.Split('-');
-            t1 = tt[0];
-            string t2 = tt[1];
-            List<lectura> lec = empresas[tabla.SelectedIndex].getLectura();
-            List<lectura> tem = new List<lectura>();
-
-            if (opt == 1)
+            if (seleccionLista > -1)
             {
+                string t1 = empresas[tabla.SelectedIndex].intervaloMal[seleccionLista];
+                string[] tt = t1.Split('-');
+                t1 = tt[0];
+                string t2 = tt[1];
+                List<lectura> lec = empresas[tabla.SelectedIndex].getLectura();
+                List<lectura> tem = new List<lectura>();
 
-                foreach (lectura l1 in lec)
+                if (opt == 1)
                 {
 
-
-                    if (l1.fecha.Equals(t1))
+                    foreach (lectura l1 in lec)
                     {
-                        l1.cantidad = 0;
 
-                    }
-                    else
-                    if (l1.fecha.Equals(t2))
-                    {
-                        l1.cantidad = 0;
-                        tem.Add(l1);
-                        break;
-                    }
 
-                   // tem.Add(l1);
-                }
-               // empresas[tabla.SelectedIndex].setListaLectura(tem);
-            }
-            if (opt == 2)
-            {
-
-                foreach (lectura li2 in lec)
-                {
-                    if (li2.index == seleccionLista)
-                    {
-                        t1 = li2.fecha;
-
-                        string te = t1.Substring(0, 2);
-                        int dia = 0;
-                        int.TryParse(te, out dia);
-                        int pos = -1, pos2 = 0;
-                        //buscamos dia anterior
-                        if (dia < 9)
-                            dia = dia + 7;
-                        else
-                            dia = dia - 7;
-                        String fecTem = "";
-                        if (dia < 10)
-                            fecTem = "0" + dia.ToString();
-                        else
-                            fecTem = dia.ToString();
-                        fecTem = fecTem + t1.Substring(2);
-
-                        foreach (lectura li in lec)
+                        if (l1.fecha.Equals(t1))
                         {
-                            pos++;
-
-                            if (li.fecha.Equals(t1))
-                            {
-                                pos2 = pos;
-                            }
+                            l1.cantidad = 0;
 
                         }
-
-                        foreach (lectura l1 in lec)
+                        else
+                        if (l1.fecha.Equals(t2))
                         {
+                            l1.cantidad = 0;
+                            tem.Add(l1);
+                            break;
+                        }
 
-                            if (l1.fecha.Equals(fecTem))
+                        // tem.Add(l1);
+                    }
+                    // empresas[tabla.SelectedIndex].setListaLectura(tem);
+                }
+                if (opt == 2)
+                {
+
+                    foreach (lectura li2 in lec)
+                    {
+                        if (li2.index == seleccionLista)
+                        {
+                            t1 = li2.fecha;
+
+                            string te = t1.Substring(0, 2);
+                            int dia = 0;
+                            int.TryParse(te, out dia);
+                            int pos = -1, pos2 = 0;
+                            //buscamos dia anterior
+                            if (dia < 9)
+                                dia = dia + 7;
+                            else
+                                dia = dia - 7;
+                            String fecTem = "";
+                            if (dia < 10)
+                                fecTem = "0" + dia.ToString();
+                            else
+                                fecTem = dia.ToString();
+                            fecTem = fecTem + t1.Substring(2);
+
+                            foreach (lectura li in lec)
                             {
-                                float nCantidad = l1.cantidad;
-                                empresas[tabla.SelectedIndex].lista[pos2].cantidad = nCantidad;
-                                empresas[tabla.SelectedIndex].lista[pos2].e = l1.e;
-                                empresas[tabla.SelectedIndex].lista[pos2].pm = l1.pm;
-                                empresas[tabla.SelectedIndex].lista[pos2].q1 = l1.q1;
-                                empresas[tabla.SelectedIndex].lista[pos2].q2 = l1.q2;
-                                empresas[tabla.SelectedIndex].lista[pos2].q3 = l1.q3;
-                                empresas[tabla.SelectedIndex].lista[pos2].q4 = l1.q4;
-                                empresas[tabla.SelectedIndex].lista[pos2].r = l1.r;
+                                pos++;
+
+                                if (li.fecha.Equals(t1))
+                                {
+                                    pos2 = pos;
+                                }
 
                             }
 
+                            foreach (lectura l1 in lec)
+                            {
+
+                                if (l1.fecha.Equals(fecTem))
+                                {
+                                    float nCantidad = l1.cantidad;
+                                    empresas[tabla.SelectedIndex].lista[pos2].cantidad = nCantidad;
+                                    empresas[tabla.SelectedIndex].lista[pos2].e = l1.e;
+                                    empresas[tabla.SelectedIndex].lista[pos2].pm = l1.pm;
+                                    empresas[tabla.SelectedIndex].lista[pos2].q1 = l1.q1;
+                                    empresas[tabla.SelectedIndex].lista[pos2].q2 = l1.q2;
+                                    empresas[tabla.SelectedIndex].lista[pos2].q3 = l1.q3;
+                                    empresas[tabla.SelectedIndex].lista[pos2].q4 = l1.q4;
+                                    empresas[tabla.SelectedIndex].lista[pos2].r = l1.r;
+
+                                }
+
+                            }
+
+
                         }
-
-
                     }
                 }
-            }
 
-
+            }//if
 
         }
 
@@ -277,6 +279,7 @@ namespace TheBillionApp
                             Boolean existeRango = false, existeRango2 = false;
                             int total = ds.Tables[0].Columns.Count;
                             fila.columnas = total;
+                        DataRow tem = null;
 
 
                             foreach (DataRow fila2 in ds.Tables[0].Rows)
@@ -344,6 +347,7 @@ namespace TheBillionApp
                                         rangoAnterior = fila2[0].ToString();
 
                                     danado++;
+                                tem = fila2;
 
 
                                 }
@@ -379,7 +383,21 @@ namespace TheBillionApp
 
 
                             }
-                            fila.totalDanado = danado;
+                        if ( existeRango == true)
+                        {
+                            if (rangoAnterior == "")
+                                rango += "-" + tem[0].ToString();
+                            else
+                                rango += "-" + rangoAnterior;
+                            rangoAnterior = "";
+                            fila.addIntervaloMal(rango);
+
+                            rango = "";
+                            rangoAnterior = "";
+                            existeRango = false;
+                            tem = null;
+                        }
+                        fila.totalDanado = danado;
                         }
 
                         catch (Exception ex)
@@ -544,10 +562,30 @@ namespace TheBillionApp
       
         }
 
+        private void generaTodo(object sender, RoutedEventArgs e)
+        {
+            seleccionado = tabla.SelectedIndex;
+            Button btn = (Button)e.Source;
+            btn.IsEnabled = false;
+            Thread te = new Thread(generaTODOA);
+            te.Start();
+        }
+
         private void verGrafica(object sender, RoutedEventArgs e)
             {
 
-            }
+            
+        }
+
+        private void generaTODOA()
+        {
+            generarDBF m = new generarDBF();
+            m.generar(empresas);
+            generarCSV t1 = new generarCSV();
+            t1.generar(empresas);
+            generarExcel t2 =new generarExcel(empresas);
+            t2.generarEmpresa(empresas);
+        }
 
             private void generadbf(object sender, RoutedEventArgs e)
             {
@@ -566,11 +604,13 @@ namespace TheBillionApp
 
             private void cambio(object sender, MouseButtonEventArgs e)
             {
-
+            if (seleccionLista > -1)
+            {
                 ListView btn = (ListView)sender;
                 seleccionLista = btn.SelectedIndex;
                 opcion opc = new opcion(this);
                 opc.Show();
+            }
             }
 
             public void getFecha()
