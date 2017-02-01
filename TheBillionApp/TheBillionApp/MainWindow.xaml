@@ -71,17 +71,10 @@
 
 
         </Grid>
-        <Rectangle HorizontalAlignment="Left" Height="72" Margin="106,28,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="1124" RenderTransformOrigin="0.5,0.46">
-            <Rectangle.Effect>
-                <DropShadowEffect/>
-            </Rectangle.Effect>
-            <Rectangle.Fill>
-                <ImageBrush ImageSource="Images/nav.png" Stretch="Uniform"/>
-            </Rectangle.Fill>
-        </Rectangle>
-        <Button Content="ADMINISTRADOR" HorizontalAlignment="Left" Margin="596,430,0,0" Grid.Row="2" VerticalAlignment="Top" Width="172" Height="41" FontSize="20" Background="#FF3ECD59" BorderBrush="#FF44B3E8" Foreground="White"/>
+        <Button Content="ADMINISTRADOR" HorizontalAlignment="Left" Margin="596,430,0,0" Grid.Row="2" VerticalAlignment="Top" Width="172" Height="41" FontSize="20" Background="#FF3ECD59" BorderBrush="#FF44B3E8" Foreground="White" Visibility="Hidden"/>
 
-        <DataGrid x:Name="tabla" HorizontalAlignment="Center" VerticalAlignment="Center"
+        <DataGrid x:Name="tabla" VerticalAlignment="Center"
+                  
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   SelectionMode="Single"
@@ -89,9 +82,29 @@
                   CanUserResizeRows="False"
                   CanUserSortColumns="False"
                   HeadersVisibility="Column"
-                  GridLinesVisibility="None" SelectionUnit="FullRow" Margin="113,97,10,89" Grid.Row="1" Width="1124" Height="420" Grid.RowSpan="2">
+                  GridLinesVisibility="None" SelectionUnit="FullRow" Margin="132,86,27,100" Grid.Row="1" Height="420" Grid.RowSpan="2" SelectionChanged="tabla_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  CanUserReorderColumns="False" MaxColumnWidth="600">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.CellStyle>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="130">
+
+                <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
                     <DataGridTemplateColumn.Header >
                         <TextBlock  Text="SERVICIO" />
                     </DataGridTemplateColumn.Header>
@@ -107,7 +120,12 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="190">
+                <DataGridTemplateColumn Width="200">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
                     <DataGridTemplateColumn.Header  >
                         <TextBlock  Text="NOMBRE"  />
                     </DataGridTemplateColumn.Header>
@@ -123,7 +141,12 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="90" >
+                <DataGridTemplateColumn Width="100" >
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="NO DE INTERVALOS"  />
                     </DataGridTemplateColumn.Header>
@@ -140,6 +163,11 @@
                 </DataGridTemplateColumn>
 
                 <DataGridTemplateColumn Width="300">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="INTERVALOS CON FALLA"  />
                     </DataGridTemplateColumn.Header>
@@ -154,7 +182,12 @@
                 </DataGridTemplateColumn>
 
 
-                <DataGridTemplateColumn Width="150">
+                <DataGridTemplateColumn Width="105">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="GRAFICA"  />
                     </DataGridTemplateColumn.Header>
@@ -175,6 +208,11 @@
 
 
                 <DataGridTemplateColumn Width="80">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="DBF"  />
                     </DataGridTemplateColumn.Header>
@@ -192,6 +230,11 @@
                 </DataGridTemplateColumn>
 
                 <DataGridTemplateColumn Width="80">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="XLS"  />
                     </DataGridTemplateColumn.Header>
@@ -209,6 +252,11 @@
                 </DataGridTemplateColumn>
 
                 <DataGridTemplateColumn Width="80">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
                     <DataGridTemplateColumn.Header>
                         <TextBlock  Text="CSV"  />
                     </DataGridTemplateColumn.Header>
@@ -224,8 +272,17 @@
                     </DataGridTemplateColumn.CellTemplate>
 
                 </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="button" Content="GENERAR TODO" HorizontalAlignment="Left" Margin="782,430,0,0" Grid.Row="2" VerticalAlignment="Top" Width="108" Height="45" Click="generaTodo"/>
+        <Button x:Name="button" Content="GENERAR TODO" HorizontalAlignment="Left" Margin="596,412,0,0" Grid.Row="2" VerticalAlignment="Top" Width="159" Height="45" Click="generaTodo" Background="#FF3DCD58" Foreground="White"/>
+        <Rectangle HorizontalAlignment="Left" Height="72" Margin="128,35,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="1094" RenderTransformOrigin="0.5,0.46">
+            <Rectangle.Effect>
+                <DropShadowEffect/>
+            </Rectangle.Effect>
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="Images/bar5.png" Stretch="Uniform"/>
+            </Rectangle.Fill>
+        </Rectangle>
     </Grid>
 </Window>

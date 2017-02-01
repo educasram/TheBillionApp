@@ -195,5 +195,14 @@
   <ItemGroup>
     <Resource Include="Images\chart-35773_960_720.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bar3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bar4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bar5.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

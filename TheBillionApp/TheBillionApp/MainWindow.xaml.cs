@@ -582,6 +582,11 @@ namespace TheBillionApp
             }
         }
 
+        private void tabla_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         private void generaTODOA()
         {
             generarDBF m = new generarDBF();
