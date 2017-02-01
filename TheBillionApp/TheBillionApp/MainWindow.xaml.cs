@@ -63,6 +63,7 @@ namespace TheBillionApp
             getroute1 = Fileroute.route1;
             getroute2 = Fileroute.route2;
             getnewroute = Fileroute.newroute;
+            MessageBox.Show(getnewroute);
             rutas.Add(@getroute1);
             rutas.Add(@getroute2);
             cargando();
