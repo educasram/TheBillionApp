@@ -84,8 +84,7 @@ namespace TheBillionApp
 
 
             opt = a;
-            if (seleccionLista > -1)
-            {
+          
                 string t1 = empresas[tabla.SelectedIndex].intervaloMal[seleccionLista];
                 string[] tt = t1.Split('-');
                 t1 = tt[0];
@@ -167,6 +166,7 @@ namespace TheBillionApp
                                     empresas[tabla.SelectedIndex].lista[pos2].q3 = l1.q3;
                                     empresas[tabla.SelectedIndex].lista[pos2].q4 = l1.q4;
                                     empresas[tabla.SelectedIndex].lista[pos2].r = l1.r;
+                            
 
                                 }
 
@@ -174,7 +174,7 @@ namespace TheBillionApp
 
 
                         }
-                    }
+                    
                 }
 
             }//if
@@ -537,27 +537,7 @@ namespace TheBillionApp
         private void buscar(object sender, KeyEventArgs e)
         {
 
-            int index = -1;
-
-            foreach(empresa em in empresas)
-            {
-                index++;
-                
-                if (em.clave.Contains(busca.Text))
-                    {
-                    try
-                    {
-
-                        tabla.SelectedIndex = index;
-                        DataGridRow row = (DataGridRow)tabla.ItemContainerGenerator.ContainerFromIndex(index);
-                        row.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-                    }
-                    catch (Exception er) { }
-
-
-
-                }
-            }
+            
          
       
         }
@@ -575,6 +555,31 @@ namespace TheBillionApp
             {
 
             
+        }
+
+        private void aBuscar(object sender, RoutedEventArgs e)
+        {
+            int index = -1;
+
+            foreach (empresa em in empresas)
+            {
+                index++;
+
+                if (em.clave.Contains(busca.Text))
+                {
+                    try
+                    {
+
+                        tabla.SelectedIndex = index;
+                        DataGridRow row = (DataGridRow)tabla.ItemContainerGenerator.ContainerFromIndex(index);
+                        row.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                    }
+                    catch (Exception er) { }
+
+
+
+                }
+            }
         }
 
         private void generaTODOA()
@@ -604,13 +609,12 @@ namespace TheBillionApp
 
             private void cambio(object sender, MouseButtonEventArgs e)
             {
-            if (seleccionLista > -1)
-            {
+          
                 ListView btn = (ListView)sender;
                 seleccionLista = btn.SelectedIndex;
                 opcion opc = new opcion(this);
                 opc.Show();
-            }
+            
             }
 
             public void getFecha()
