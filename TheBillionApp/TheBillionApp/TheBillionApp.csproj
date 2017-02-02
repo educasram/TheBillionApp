@@ -87,6 +87,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="generador.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,6 +103,9 @@
     <Compile Include="empresa.cs" />
     <Compile Include="Fileroute.xaml.cs">
       <DependentUpon>Fileroute.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="generador.xaml.cs">
+      <DependentUpon>generador.xaml</DependentUpon>
     </Compile>
     <Compile Include="generarCSV.cs" />
     <Compile Include="generarDBF.cs" />

@@ -12,7 +12,8 @@ namespace TheBillionApp
     class generarDBF
     {
         public static string getnewroute2;
-       
+        public int total { get; set; }
+
         public generarDBF()
         {
            
@@ -115,9 +116,10 @@ namespace TheBillionApp
 
 
 
-        public void generar(List<empresa> em)
+        public void generar(List<empresa> em, generador xxx)
         {
-            foreach(empresa e in em) { 
+            foreach(empresa e in em) {
+                total++;
             getnewroute2 = @Fileroute.newroute;
             string ruta = getnewroute2;
             string strConnDbase = @"Provider = Microsoft.Jet.OLEDB.4.0" +
@@ -207,6 +209,7 @@ namespace TheBillionApp
 
 
 
+                xxx.c2++;
             }
         }
     }

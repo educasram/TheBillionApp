@@ -11,6 +11,7 @@ namespace TheBillionApp
     class generarExcel
     {
         List<empresa> empresas;
+        public int total { get; set; }
         public static string getnewroute4;
         public generarExcel(List<empresa> empresas)
         {
@@ -117,13 +118,13 @@ namespace TheBillionApp
 
 
 
-        public void generarEmpresa(List<empresa> em)
+        public void generarEmpresa(List<empresa> em, generador xxx)
         {
             foreach (empresa e in em)
             {
                 string nombre = @"\" + e.clave + ".xls";
                 getnewroute4 = @Fileroute.newroute;
-
+                total++;
                 string ruta = getnewroute4;
 
                 string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + ruta + nombre + " ;Extended Properties='';Excel 8.0;HDR=NO;";
@@ -198,20 +199,12 @@ namespace TheBillionApp
 
 
 
-
-
-
-
-
-
-
-
                     }
                     connection.Close();
                 }
-                
 
 
+                xxx.c1++;
             }
         }
     }

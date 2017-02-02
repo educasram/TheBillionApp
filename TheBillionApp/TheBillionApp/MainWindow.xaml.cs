@@ -28,7 +28,7 @@ namespace TheBillionApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<empresa> empresas;
+        public List<empresa> empresas;
         public string getroute1, getroute2, getnewroute;
         public int totalIntervalos, seleccionado = -1, seleccionLista = -1, opt = 0;
         public List<string> rutas;
@@ -59,6 +59,8 @@ namespace TheBillionApp
             dispatcherTimer.Start();*/
 
         }
+
+
         public void getfileroutes()
         {
             getroute1 = Fileroute.route1;
@@ -544,11 +546,14 @@ namespace TheBillionApp
 
         private void generaTodo(object sender, RoutedEventArgs e)
         {
-            seleccionado = tabla.SelectedIndex;
-            Button btn = (Button)e.Source;
-            btn.IsEnabled = false;
-            Thread te = new Thread(generaTODOA);
-            te.Start();
+            /*  seleccionado = tabla.SelectedIndex;
+              Button btn = (Button)e.Source;
+              btn.IsEnabled = false;
+              Thread te = new Thread(generaTODOA);
+              te.Start();*/
+            generador x = new generador(this);
+            this.Hide();
+            x.Show();
         }
 
         private void verGrafica(object sender, RoutedEventArgs e)
@@ -588,13 +593,13 @@ namespace TheBillionApp
         }
 
         private void generaTODOA()
-        {
+        {/*
             generarDBF m = new generarDBF();
             m.generar(empresas);
             generarCSV t1 = new generarCSV();
             t1.generar(empresas);
             generarExcel t2 =new generarExcel(empresas);
-            t2.generarEmpresa(empresas);
+            t2.generarEmpresa(empresas);*/
         }
 
             private void generadbf(object sender, RoutedEventArgs e)

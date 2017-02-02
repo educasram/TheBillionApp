@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheBillionApp
 {
-    class empresa
+    public class empresa
     {
         public string clave { get; set; }
         public int index { get; set; }

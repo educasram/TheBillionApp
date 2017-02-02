@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheBillionApp
 {
-    class lectura
+    public class lectura
     {
         public string fecha { get; set; }
         public int index { get; set; }

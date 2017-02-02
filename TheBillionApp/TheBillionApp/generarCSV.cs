@@ -11,6 +11,7 @@ namespace TheBillionApp
     class generarCSV
     {
         public static string getnewroute3;
+        public int total { get; set; }
         public generarCSV() { }
       
         public Boolean generar(empresa e)
@@ -47,7 +48,7 @@ namespace TheBillionApp
                 {
                     string csvFile = e.clave + ".csv";
                     
-                    string csvFilePath = getnewroute3 + csvFile;
+                    string csvFilePath = getnewroute3 + @"\" + csvFile;
                     using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
                     {
                         sw.Write(tmpCSV.ToString());
@@ -87,9 +88,9 @@ namespace TheBillionApp
 
                 try
                 {
-                    string csvFile = e.clave + ".csv";
+                    string csvFile = e.clave  + ".csv";
                  
-                    string csvFilePath = getnewroute3 + csvFile;
+                    string csvFilePath = getnewroute3 + @"\" + csvFile;
                     using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
                     {
                         sw.Write(tmpCSV.ToString());
@@ -147,15 +148,16 @@ namespace TheBillionApp
 
 
 
-
-        public void generar(List<empresa> e)
+        public void generar(List<empresa> e,generador xxx)
         {
             getnewroute3 = @Fileroute.newroute;
             //Exportamos el CVS ...
-            StringBuilder tmpCSV = new StringBuilder();
+            
             string tmpLinea = "";
             foreach (empresa em in e)
             {
+                StringBuilder tmpCSV = new StringBuilder();
+                total++;
                 if (em.columnas == 9)
                 {
 
@@ -179,23 +181,17 @@ namespace TheBillionApp
                         tmpCSV.Append(tmpLinea + "\r\n");
                     }
 
-                    try
-                    {
+                  
                         string csvFile = em.clave + ".csv";
 
-                        string csvFilePath = getnewroute3 + csvFile;
+                        string csvFilePath = getnewroute3+@"\" + csvFile;
                         using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
                         {
                             sw.Write(tmpCSV.ToString());
                             sw.Close();
                         }
 
-                    }
-                    catch (Exception ex)
-                    {
-
-                     
-                    }
+           
                 }
 
                 if (em.columnas == 8)
@@ -221,23 +217,17 @@ namespace TheBillionApp
                         tmpCSV.Append(tmpLinea + "\r\n");
                     }
 
-                    try
-                    {
+                   
                         string csvFile = em.clave + ".csv";
 
-                        string csvFilePath = getnewroute3 + csvFile;
+                        string csvFilePath = getnewroute3 + @"\" + csvFile;
                         using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
                         {
                             sw.Write(tmpCSV.ToString());
                             sw.Close();
                         }
 
-                    }
-                    catch (Exception ex)
-                    {
-
-         
-                    }
+             
                 }
 
                 if (em.columnas == 5)
@@ -259,8 +249,7 @@ namespace TheBillionApp
                         tmpCSV.Append(tmpLinea + "\r\n");
                     }
 
-                    try
-                    {
+                
                         string csvFile = em.clave + ".csv";
 
                         string csvFilePath = getnewroute3 + @"\" + csvFile;
@@ -270,13 +259,14 @@ namespace TheBillionApp
                             sw.Close();
                         }
 
-                    }
-                    catch (Exception ex)
-                    {
-
-                      
-                    }
+                
+                    
                 }
+
+                xxx.c3++;
+
+
+
 
             }//foreach
         }
