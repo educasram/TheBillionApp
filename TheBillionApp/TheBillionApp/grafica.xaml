@@ -50,5 +50,6 @@
                 </chartingToolkit:AreaSeries.Background>
             </chartingToolkit:AreaSeries>
         </chartingToolkit:Chart>
+        <Label x:Name="label" Content="kws-2hrs" HorizontalAlignment="Left" Margin="58,137,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

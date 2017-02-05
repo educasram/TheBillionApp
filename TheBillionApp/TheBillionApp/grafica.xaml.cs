@@ -40,7 +40,7 @@ namespace TheBillionApp
 
                     if (conta == 12)
                     {
-                        MyValue.Add(new KeyValuePair<string, float>(e.fecha, e.e/12));
+                        MyValue.Add(new KeyValuePair<string, float>(e.fecha, e.e/24));
                         prom = 0;
                         conta = 0;
                     }

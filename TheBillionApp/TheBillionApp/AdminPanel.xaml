@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TheBillionApp"
         mc:Ignorable="d"
-        Title="AdminPanel" Height="600" Width="600">
+        Title="AdminPanel" Height="600" Width="918">
     <Grid>
         <DataGrid x:Name="grid1" HorizontalAlignment="Left" Height="161" Margin="304,10,0,0" VerticalAlignment="Top" Width="278"/>
         <TextBox x:Name="txtServicio" HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" TextWrapping="Wrap" Text="servicio" VerticalAlignment="Top" Width="264" FontSize="25" TextChanged="TextBox_TextChanged_1"/>
