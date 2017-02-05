@@ -557,9 +557,11 @@ namespace TheBillionApp
         }
 
         private void verGrafica(object sender, RoutedEventArgs e)
-            {
+        {
+            seleccionLista = tabla.SelectedIndex;
+           grafica x = new grafica(empresas[seleccionLista]);
+            x.Show();
 
-            
         }
 
         private void aBuscar(object sender, RoutedEventArgs e)
