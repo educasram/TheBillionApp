@@ -284,6 +284,5 @@
                 <ImageBrush ImageSource="Images/bar5.png" Stretch="Uniform"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="128,457,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

@@ -22,22 +22,8 @@
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Label x:Name="label_Copy" Content="XLS" HorizontalAlignment="Left" Margin="72,21,0,0" VerticalAlignment="Top" FontSize="18">
-            <Label.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF75DC57" Offset="1"/>
-                </LinearGradientBrush>
-            </Label.Foreground>
-        </Label>
-        <Label x:Name="label_Copy1" Content="DBF" HorizontalAlignment="Left" Margin="69,66,0,0" VerticalAlignment="Top" FontSize="18">
-            <Label.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF75DC57" Offset="1"/>
-                </LinearGradientBrush>
-            </Label.Foreground>
-        </Label>
+        <Label x:Name="label_Copy" Content="XLS" HorizontalAlignment="Left" Margin="72,21,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
+        <Label x:Name="label_Copy1" Content="DBF" HorizontalAlignment="Left" Margin="69,66,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
         <ProgressBar x:Name="dbf" HorizontalAlignment="Left" Height="16" Margin="69,92,0,0" VerticalAlignment="Top" Width="292">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -46,14 +32,7 @@
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Label x:Name="label_Copy2" Content="CSV" HorizontalAlignment="Left" Margin="69,113,0,0" VerticalAlignment="Top" FontSize="18">
-            <Label.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF75DC57" Offset="1"/>
-                </LinearGradientBrush>
-            </Label.Foreground>
-        </Label>
+        <Label x:Name="label_Copy2" Content="CSV" HorizontalAlignment="Left" Margin="69,113,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
         <ProgressBar x:Name="csv" HorizontalAlignment="Left" Height="16" Margin="69,139,0,0" VerticalAlignment="Top" Width="292">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -62,6 +41,14 @@
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
+        <Grid HorizontalAlignment="Left" Height="23" Margin="360,4,-5,0" VerticalAlignment="Top" Width="72">
+            <Grid.Effect>
+                <DropShadowEffect/>
+            </Grid.Effect>
+            <Grid.Background>
+                <ImageBrush ImageSource="Images/logo.png" Stretch="UniformToFill"/>
+            </Grid.Background>
+        </Grid>
 
     </Grid>
 </Window>
