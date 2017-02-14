@@ -20,25 +20,38 @@ namespace TheBillionApp
             //Exportamos el CVS ...
             StringBuilder tmpCSV = new StringBuilder();
             string tmpLinea = "";
-     
-            if (e.columnas == 9)
-            {
+            int hora = 0;
+            int minuto = 0;
+            int conta = 0;
+            int contaMin = 0;
+            bool bandera = false;
 
-                tmpCSV.Append("(LocalTime;kVARhQ1;kVARhQ2;kVARhQ3;kVARhQ4;kWhE;kWhR;PTxCTPM");
+        
+
+                tmpCSV.Append("FECHA,HORA,MINUTO,KWH,KVARH,KW");
                 tmpCSV.Append("\r\n");
                 foreach (lectura l in e.getLectura())
                 {
+                tmpLinea = "";
+                contaMin++;
+                conta++;
+                if (conta % 12 == 0)
+                    hora++;
+                minuto = contaMin * 5;
+                if (minuto == 60)
+                {
+                    minuto = 0;
+                    contaMin = 0;
+                    bandera = true;
+                }
 
-                    tmpLinea = "";
-
-                    tmpLinea += l.fecha + ";";
-                    tmpLinea += l.q1 + ";";
-                    tmpLinea += l.q2 + ";";
-                    tmpLinea += l.q3 + ";";
-                    tmpLinea += l.q4 + ";";
-                    tmpLinea += l.cantidad + ";";
-                    tmpLinea += l.r + ";";
-                    tmpLinea += l.pm;
+                tmpLinea += l.fecha + ",";
+                    tmpLinea += hora + ",";
+                    tmpLinea += minuto + ",";
+                    tmpLinea += l.e + ",";
+                tmpLinea += l.r + ",";
+                tmpLinea +=  "0";
+                
 
 
                     tmpCSV.Append(tmpLinea + "\r\n");
@@ -61,87 +74,8 @@ namespace TheBillionApp
              
                     return false;
                 }
-            }
+            
 
-            if (e.columnas == 8)
-            {
-
-                tmpCSV.Append("(LocalTime;kVARhQ1;kVARhQ2;kVARhQ3;kVARhQ4;kWhE;kWhR;");
-                tmpCSV.Append("\r\n");
-                foreach (lectura l in e.getLectura())
-                {
-
-                    tmpLinea = "";
-
-                    tmpLinea += l.fecha + ";";
-                    tmpLinea += l.q1 + ";";
-                    tmpLinea += l.q2 + ";";
-                    tmpLinea += l.q3 + ";";
-                    tmpLinea += l.q4 + ";";
-                    tmpLinea += l.cantidad + ";";
-                    tmpLinea += l.r;
-   
-
-
-                    tmpCSV.Append(tmpLinea + "\r\n");
-                }
-
-                try
-                {
-                    string csvFile = e.clave  + ".csv";
-                 
-                    string csvFilePath = getnewroute3 + @"\" + csvFile;
-                    using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
-                    {
-                        sw.Write(tmpCSV.ToString());
-                        sw.Close();
-                    }
-
-                }
-                catch (Exception ex)
-                {
-
-                    return false;
-                }
-            }
-
-            if (e.columnas == 5)
-            {
-
-                tmpCSV.Append("(LocalTime;kVARhQ1;kVARhQ4;kWh");
-                tmpCSV.Append("\r\n");
-                foreach (lectura l in e.getLectura())
-                {
-
-                    tmpLinea = "";
-
-                    tmpLinea += l.fecha + ";";
-                    tmpLinea += l.q1 + ";";
-                    tmpLinea += l.q4 + ";";
-                    tmpLinea += l.cantidad;
-
-
-                    tmpCSV.Append(tmpLinea + "\r\n");
-                }
-
-                try
-                {
-                    string csvFile = e.clave + ".csv";
-                   
-                    string csvFilePath = getnewroute3+@"\" + csvFile;
-                    using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
-                    {
-                        sw.Write(tmpCSV.ToString());
-                        sw.Close();
-                    }
-
-                }
-                catch (Exception ex)
-                {
-
-                    return false;
-                }
-            }
          
             return true;
         }
@@ -158,27 +92,43 @@ namespace TheBillionApp
             {
                 StringBuilder tmpCSV = new StringBuilder();
                 total++;
-                if (em.columnas == 9)
-                {
 
-                    tmpCSV.Append("(LocalTime;kVARhQ1;kVARhQ2;kVARhQ3;kVARhQ4;kWhE;kWhR;PTxCTPM");
-                    tmpCSV.Append("\r\n");
+
+                int hora = 0;
+                int minuto = 0;
+                int conta = 0;
+                int contaMin = 0;
+                bool bandera = false;
+
+
+
+                tmpCSV.Append("FECHA,HORA,MINUTO,KWH,KVARH,KW");
+                tmpCSV.Append("\r\n");
                     foreach (lectura l in em.getLectura())
                     {
+                    contaMin++;
+                    conta++;
+                    if (conta % 12 == 0)
+                        hora++;
+                    minuto = contaMin * 5;
+                    if (minuto == 60)
+                    {
+                        minuto = 0;
+                        contaMin = 0;
+                        bandera = true;
+                    }
 
-                        tmpLinea = "";
+                    tmpLinea = "";
 
-                        tmpLinea += l.fecha + ";";
-                        tmpLinea += l.q1 + ";";
-                        tmpLinea += l.q2 + ";";
-                        tmpLinea += l.q3 + ";";
-                        tmpLinea += l.q4 + ";";
-                        tmpLinea += l.cantidad + ";";
-                        tmpLinea += l.r + ";";
-                        tmpLinea += l.pm;
+                    tmpLinea += l.fecha + ",";
+                    tmpLinea += hora + ",";
+                    tmpLinea += minuto + ",";
+                    tmpLinea += l.e + ",";
+                    tmpLinea += l.r + ",";
+                    tmpLinea += "0";
 
 
-                        tmpCSV.Append(tmpLinea + "\r\n");
+                    tmpCSV.Append(tmpLinea + "\r\n");
                     }
 
                   
@@ -192,76 +142,8 @@ namespace TheBillionApp
                         }
 
            
-                }
-
-                if (em.columnas == 8)
-                {
-
-                    tmpCSV.Append("(LocalTime;kVARhQ1;kVARhQ2;kVARhQ3;kVARhQ4;kWhE;kWhR;");
-                    tmpCSV.Append("\r\n");
-                    foreach (lectura l in em.getLectura())
-                    {
-
-                        tmpLinea = "";
-
-                        tmpLinea += l.fecha + ";";
-                        tmpLinea += l.q1 + ";";
-                        tmpLinea += l.q2 + ";";
-                        tmpLinea += l.q3 + ";";
-                        tmpLinea += l.q4 + ";";
-                        tmpLinea += l.cantidad + ";";
-                        tmpLinea += l.r;
-
-
-
-                        tmpCSV.Append(tmpLinea + "\r\n");
-                    }
-
-                   
-                        string csvFile = em.clave + ".csv";
-
-                        string csvFilePath = getnewroute3 + @"\" + csvFile;
-                        using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
-                        {
-                            sw.Write(tmpCSV.ToString());
-                            sw.Close();
-                        }
-
-             
-                }
-
-                if (em.columnas == 5)
-                {
-
-                    tmpCSV.Append("(LocalTime;kVARhQ1;kVARhQ4;kWh");
-                    tmpCSV.Append("\r\n");
-                    foreach (lectura l in em.getLectura())
-                    {
-
-                        tmpLinea = "";
-
-                        tmpLinea += l.fecha + ";";
-                        tmpLinea += l.q1 + ";";
-                        tmpLinea += l.q4 + ";";
-                        tmpLinea += l.cantidad;
-
-
-                        tmpCSV.Append(tmpLinea + "\r\n");
-                    }
-
                 
-                        string csvFile = em.clave + ".csv";
 
-                        string csvFilePath = getnewroute3 + @"\" + csvFile;
-                        using (StreamWriter sw = new StreamWriter(@csvFilePath, false, System.Text.Encoding.UTF8))
-                        {
-                            sw.Write(tmpCSV.ToString());
-                            sw.Close();
-                        }
-
-                
-                    
-                }
 
                 xxx.c3++;
 

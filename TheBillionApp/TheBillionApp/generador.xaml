@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TheBillionApp"
         mc:Ignorable="d"
-        Title="generador" Height="199.198" Width="427.347" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FF171616" WindowStyle="None" Margin="5" Foreground="#FF972D2D" Opacity="0.9">
+        Title="generador" Height="400   " Width="427.347" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FF171616" WindowStyle="None" Margin="5" Foreground="#FF972D2D" Opacity="0.9">
     <Window.BorderBrush>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="Black" Offset="0"/>
@@ -13,6 +13,14 @@
         </LinearGradientBrush>
     </Window.BorderBrush>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="197*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="426*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <ProgressBar HorizontalAlignment="Left" Height="16" Margin="69,45,0,0" VerticalAlignment="Top" Width="292"/>
         <ProgressBar x:Name="xls" HorizontalAlignment="Left" Height="16" Margin="69,45,0,0" VerticalAlignment="Top" Width="292">
             <ProgressBar.Foreground>
@@ -41,7 +49,7 @@
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Grid HorizontalAlignment="Left" Height="23" Margin="360,4,-5,0" VerticalAlignment="Top" Width="72">
+        <Grid HorizontalAlignment="Left" Height="23" Margin="360,4,-5,0" VerticalAlignment="Top" Width="72" Grid.ColumnSpan="2">
             <Grid.Effect>
                 <DropShadowEffect/>
             </Grid.Effect>
@@ -49,6 +57,10 @@
                 <ImageBrush ImageSource="Images/logo.png" Stretch="UniformToFill"/>
             </Grid.Background>
         </Grid>
+        <RadioButton x:Name="opcion1" Content="XLS" HorizontalAlignment="Left" Margin="109,201,0,0" VerticalAlignment="Top" Foreground="White" FontSize="24" IsChecked="True"/>
+        <RadioButton x:Name="opcion2" Content="DBF" HorizontalAlignment="Left" Margin="109,232,0,0" VerticalAlignment="Top" Foreground="White" FontSize="24"/>
+        <RadioButton x:Name="opcion3" Content="CSV" HorizontalAlignment="Left" Margin="109,268,0,0" VerticalAlignment="Top" Foreground="White" FontSize="24"/>
+        <Button x:Name="button" Content="GENERAR" HorizontalAlignment="Left" Margin="109,304,0,0" VerticalAlignment="Top" Width="190" Background="#FF506648" Foreground="#FFFBF7F7" FontSize="36" Click="gen"/>
 
     </Grid>
 </Window>

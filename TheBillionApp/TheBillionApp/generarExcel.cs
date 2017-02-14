@@ -31,6 +31,12 @@ namespace TheBillionApp
             string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+ruta + nombre +" ;Extended Properties='';Excel 8.0;HDR=NO;";
 
             string connectionString = con;
+            int hora = 0;
+            int minuto = 0;
+            int conta = 0;
+            int contaMin = 0;
+            total++;
+            bool bandera = false;
             DbProviderFactory factory =
               DbProviderFactories.GetFactory("System.Data.OleDb");
 
@@ -41,60 +47,37 @@ namespace TheBillionApp
                 {
                     connection.Open();  //open the connection
                     string nombrame = e.clave;
+                    contaMin++;
+                    conta++;
+                    if (conta % 12 == 0)
+                        hora++;
+                    minuto = contaMin * 5;
+                    if (minuto == 60)
+                    {
+                        minuto = 0;
+                        contaMin = 0;
+                        bandera = true;
+                    }
 
                     if (e.clave == "DA013111")
                         nombrame = "error";
 
-                    if (e.columnas == 8)
-                    {
-                        try
-                        {
-                            command.CommandText = "CREATE TABLE [" + nombrame + "] (LocalTime char(255), kVARhQ1 char(255), kVARhQ2 char(255), kVARhQ3 char(255), kVARhQ4 char(255), kWhE char(255), kWhR char(255))";
-                            command.ExecuteNonQuery();
-
-                            foreach (lectura l in e.getLectura())
-                            {
-                                command.CommandText = "INSERT INTO [" + nombrame + "$]  VALUES('" + l.fecha + "'," + l.q1 + "," + l.q2 + "," + l.q3 + "," + l.q4 + "," + l.cantidad + "," + l.r + ")";
-                                command.ExecuteNonQuery();
-
-                            }
-                        }
-                        catch (Exception er) { MessageBox.Show(er.ToString()); }
-
-
-                    }
-                    if (e.columnas == 9)
-                    {
+                
+                  
                         try { 
-                        command.CommandText = "CREATE TABLE [" + nombrame + "] (LocalTime char(255), kVARhQ1 char(255), kVARhQ2 char(255), kVARhQ3 char(255), kVARhQ4 char(255), kWhE char(255), kWhR char(255), PTxCTPM char(255))";
+                        command.CommandText = "CREATE TABLE [" + nombrame + "] (FECHA char(50),HORA char(50),MINUTO char(50), KWH char(50), KVARH char(50), KW char(50))";
                         command.ExecuteNonQuery();
 
                         foreach (lectura l in e.getLectura())
                         {
-                            command.CommandText = "INSERT INTO [" + nombrame + "$]  VALUES('" + l.fecha + "'," + l.q1 + "," + l.q2 + "," + l.q3 + "," + l.q4 + "," + l.cantidad + "," + l.r + "," + l.pm + ")";
+                            command.CommandText = "INSERT INTO [" + nombrame + "$]  VALUES('" + l.fecha + "'," + hora + "," + minuto + "," + l.e + "," + l.r + ",0)";
                             command.ExecuteNonQuery();
 
                         }
                         }
                         catch (Exception er) { MessageBox.Show(er.ToString()); }
 
-                    }
-                    if (e.columnas == 5)
-                    {
-                        try { 
-                        command.CommandText = "CREATE TABLE [" + nombrame + "] (LocalTime char(255), kVARhQ1 char(255), kVARhQ4 char(255), kWhE char(255))";
-                        command.ExecuteNonQuery();
-
-                        foreach (lectura l in e.getLectura())
-                        {
-                            command.CommandText = "INSERT INTO [" + nombrame + "$]  VALUES('" + l.fecha + "'," + l.q1 + "," + l.q4 + "," + l.cantidad +")";
-                            command.ExecuteNonQuery();
-
-                        }
-                        }
-                        catch (Exception er) { MessageBox.Show(er.ToString()); }
-
-                    }
+                    
 
 
 
@@ -123,13 +106,19 @@ namespace TheBillionApp
             foreach (empresa e in em)
             {
                 string nombre = @"\" + e.clave + ".xls";
+
                 getnewroute4 = @Fileroute.newroute;
                 total++;
                 string ruta = getnewroute4;
+                
+                int hora = 0;
+                int minuto = 0;
+                int conta = 0;
+                int contaMin = 0;
 
                 string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + ruta + nombre + " ;Extended Properties='';Excel 8.0;HDR=NO;";
-
                 string connectionString = con;
+
                 DbProviderFactory factory =
                   DbProviderFactories.GetFactory("System.Data.OleDb");
 
@@ -144,58 +133,25 @@ namespace TheBillionApp
                         if (e.clave == "DA013111")
                             nombrame = "error";
 
-                        if (e.columnas == 8)
-                        {
+                      
                             try
                             {
-                                command.CommandText = "CREATE TABLE [" + nombrame + "] (LocalTime char(255), kVARhQ1 char(255), kVARhQ2 char(255), kVARhQ3 char(255), kVARhQ4 char(255), kWhE char(255), kWhR char(255))";
-                                command.ExecuteNonQuery();
+                            command.CommandText = "CREATE TABLE [" + nombrame + "] (FECHA char(50),HORA char(50),MINUTO char(50), KWH char(50), KVARH char(50), KW char(50))";
+
+                            command.ExecuteNonQuery();
 
                                 foreach (lectura l in e.getLectura())
                                 {
-                                    command.CommandText = "INSERT INTO [" + nombrame + "$]  VALUES('" + l.fecha + "'," + l.q1 + "," + l.q2 + "," + l.q3 + "," + l.q4 + "," + l.cantidad + "," + l.r + ")";
-                                    command.ExecuteNonQuery();
+                                command.CommandText = "INSERT INTO [" + nombrame + "$]  VALUES('" + l.fecha + "'," + hora + "," + minuto + "," + l.e + "," + l.r + ",0)";
+                                command.ExecuteNonQuery();
 
                                 }
                             }
                             catch (Exception er) { MessageBox.Show(er.ToString()); }
 
 
-                        }
-                        if (e.columnas == 9)
-                        {
-                            try
-                            {
-                                command.CommandText = "CREATE TABLE [" + nombrame + "] (LocalTime char(255), kVARhQ1 char(255), kVARhQ2 char(255), kVARhQ3 char(255), kVARhQ4 char(255), kWhE char(255), kWhR char(255), PTxCTPM char(255))";
-                                command.ExecuteNonQuery();
-
-                                foreach (lectura l in e.getLectura())
-                                {
-                                    command.CommandText = "INSERT INTO [" + nombrame + "$]  VALUES('" + l.fecha + "'," + l.q1 + "," + l.q2 + "," + l.q3 + "," + l.q4 + "," + l.cantidad + "," + l.r + "," + l.pm + ")";
-                                    command.ExecuteNonQuery();
-
-                                }
-                            }
-                            catch (Exception er) { MessageBox.Show(er.ToString()); }
-
-                        }
-                        if (e.columnas == 5)
-                        {
-                            try
-                            {
-                                command.CommandText = "CREATE TABLE [" + nombrame + "] (LocalTime char(255), kVARhQ1 char(255), kVARhQ4 char(255), kWhE char(255))";
-                                command.ExecuteNonQuery();
-
-                                foreach (lectura l in e.getLectura())
-                                {
-                                    command.CommandText = "INSERT INTO [" + nombrame + "$]  VALUES('" + l.fecha + "'," + l.q1 + "," + l.q4 + "," + l.cantidad + ")";
-                                    command.ExecuteNonQuery();
-
-                                }
-                            }
-                            catch (Exception er) { MessageBox.Show(er.ToString()); }
-
-                        }
+                        
+                        
 
 
 

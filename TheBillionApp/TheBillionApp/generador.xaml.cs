@@ -60,12 +60,7 @@ namespace TheBillionApp
             };
             dispathcer.Start();
 
-            Thread te = new Thread(generaXLS);
-            te.Start();
-            Thread te2 = new Thread(generaDBF);
-            te2.Start();
-            Thread te3 = new Thread(generaCSV);
-            te3.Start();
+           
         }
 
     
@@ -99,6 +94,34 @@ namespace TheBillionApp
         {
             csv.Value=c3;
         }
+
+        private void gen(object sender, RoutedEventArgs e)
+        {
+            if (opcion1.IsChecked == true)
+            {
+                Thread te = new Thread(generaXLS);
+                te.Start();
+            }
+            if (opcion2.IsChecked == true)
+            {
+                Thread te2 = new Thread(generaDBF);
+                te2.Start();
+            }
+            if (opcion3.IsChecked == true)
+            {
+                Thread te3 = new Thread(generaCSV);
+                te3.Start();
+            }
+
+
+
+
+
+
+                
+           
+        }
+
         private void generaXLS()
         {
        
